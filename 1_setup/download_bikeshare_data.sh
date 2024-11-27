@@ -60,10 +60,10 @@ download_station_info() {
     done
 }
 
-# download_divvy
-# download_metro
+download_divvy
+download_metro
 download_citibike
-# download_station_info
+download_station_info
 
 for zip_file in $bs_dir/*/*.zip; do
     unzip -o "$zip_file" -d "$(dirname "$zip_file")"
