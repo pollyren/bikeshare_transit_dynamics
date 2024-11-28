@@ -103,13 +103,15 @@ def load_gtfs_data(cursor, agency, quarter):
         'routes': pd.DataFrame(),
         'trips': pd.DataFrame(),
         'stop_times': pd.DataFrame(),
+        'calendar': pd.DataFrame()
     }
 
     column_mappings = {
         'stops': ['stop_id', 'stop_name', 'stop_lat', 'stop_lon'],
         'routes': ['route_id', 'route_short_name', 'route_long_name', 'route_type'],
         'trips': ['trip_id', 'route_id', 'service_id'],
-        'stop_times': ['trip_id', 'stop_id', 'arrival_time', 'departure_time', 'stop_sequence']
+        'stop_times': ['trip_id', 'stop_id', 'arrival_time', 'departure_time', 'stop_sequence'],
+        'calendar': ['service_id', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     }
 
     gtfs_path = AGENCIES[agency]
@@ -132,6 +134,12 @@ def load_gtfs_data(cursor, agency, quarter):
             stop_times = validate_time_format(stop_times)
             combined_data['stop_times'] = pd.concat([combined_data['stop_times'], stop_times])
 
+            try:
+                calendar = pd.read_csv(os.path.join(folder_path, 'calendar.txt'))
+                combined_data['calendar'] = pd.concat([combined_data['calendar'], calendar])
+            except FileNotFoundError:
+                continue    # MTA LIRR does not have a calendar in GTFS files
+
     for key, columns in column_mappings.items():
         combined_data[key] = combined_data[key].drop_duplicates(subset=[columns[0]]).reset_index(drop=True)
 
@@ -150,7 +158,6 @@ def load_gtfs_data(cursor, agency, quarter):
             '''
         cursor.copy_expert(sql, buffer)
         print(f'loaded {table} for {quarter}')
-        return
 
 def update_stops_geom(cursor, table):
     cursor.execute(f'''
