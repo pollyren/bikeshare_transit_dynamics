@@ -1,0 +1,187 @@
+import psycopg2
+import os
+import pandas as pd
+from io import StringIO
+
+DB_CONFIG = {
+    'dbname': 'bikeshare_transit_dynamics',
+    'host': 'localhost',
+    'port': 5432
+}
+
+QUARTERS = ['q1', 'q2', 'q3', 'q4']
+
+AGENCIES = {
+    'cta': 'chicago', 
+    'mta': 'nyc', 
+    'metro': 'la'
+}
+
+os.chdir(os.path.abspath(os.path.join(os.path.dirname(__file__), '../data/gtfs')))
+
+def generate_create_table_sql(agency):
+    queries = []
+
+    for quarter in QUARTERS:
+        queries.extend([
+            f'''
+            CREATE TABLE IF NOT EXISTS {agency}_{quarter}_stops (
+                stop_id TEXT PRIMARY KEY,
+                stop_name TEXT,
+                stop_lat DOUBLE PRECISION,
+                stop_lon DOUBLE PRECISION,
+                geom GEOMETRY(Point, 4326) DEFAULT NULL
+            );
+            ''',
+            f'''
+            CREATE TABLE IF NOT EXISTS {agency}_{quarter}_routes (
+                route_id TEXT PRIMARY KEY,
+                route_short_name TEXT,
+                route_long_name TEXT,
+                route_type INTEGER
+            );
+            ''',
+            f'''
+            CREATE TABLE IF NOT EXISTS {agency}_{quarter}_trips (
+                trip_id TEXT PRIMARY KEY,
+                route_id TEXT REFERENCES {agency}_{quarter}_routes(route_id),
+                service_id TEXT
+            );
+            ''',
+            f'''
+            CREATE TABLE IF NOT EXISTS {agency}_{quarter}_stop_times (
+                id SERIAL PRIMARY KEY,
+                trip_id TEXT REFERENCES {agency}_{quarter}_trips(trip_id),
+                stop_id TEXT REFERENCES {agency}_{quarter}_stops(stop_id),
+                arrival_time TIME,
+                departure_time TIME,
+                stop_sequence INTEGER
+            );
+            ''',
+            f'''
+            CREATE TABLE IF NOT EXISTS {agency}_{quarter}_calendar (
+                service_id TEXT PRIMARY KEY,
+                monday BOOLEAN,
+                tuesday BOOLEAN,
+                wednesday BOOLEAN,
+                thursday BOOLEAN,
+                friday BOOLEAN,
+                saturday BOOLEAN,
+                sunday BOOLEAN,
+                start_date DATE,
+                end_date DATE
+            );
+            '''
+        ])
+    
+    return queries
+
+def create_tables(cursor):
+    for agency in AGENCIES:
+        create_table_sqls = generate_create_table_sql(agency)
+        for sql in create_table_sqls:
+            cursor.execute(sql)
+        
+        print(f'completed {agency}')
+
+def dataframe_to_csv_buffer(df, columns):
+    buffer = StringIO()
+    df[columns].to_csv(buffer, index=False, header=False)  # Include only specified columns
+    buffer.seek(0)
+    return buffer
+
+def validate_time_format(df):
+    for col in ['arrival_time', 'departure_time']:
+        df[col] = pd.to_datetime(df[col], format='%H:%M:%S', errors='coerce')
+
+    df = df.dropna(subset=['arrival_time', 'departure_time']).reset_index(drop=True)
+    return df
+
+def load_gtfs_data(cursor, agency, quarter):
+    combined_data = {
+        'stops': pd.DataFrame(),
+        'routes': pd.DataFrame(),
+        'trips': pd.DataFrame(),
+        'stop_times': pd.DataFrame(),
+    }
+
+    column_mappings = {
+        'stops': ['stop_id', 'stop_name', 'stop_lat', 'stop_lon'],
+        'routes': ['route_id', 'route_short_name', 'route_long_name', 'route_type'],
+        'trips': ['trip_id', 'route_id', 'service_id'],
+        'stop_times': ['trip_id', 'stop_id', 'arrival_time', 'departure_time', 'stop_sequence']
+    }
+
+    gtfs_path = AGENCIES[agency]
+    
+    for folder in os.listdir(gtfs_path):
+        if quarter in folder:
+            folder_path = os.path.join(gtfs_path, folder)
+            print(f'processing {folder_path}...')
+
+            stops = pd.read_csv(os.path.join(folder_path, 'stops.txt'))
+            combined_data['stops'] = pd.concat([combined_data['stops'], stops])
+
+            routes = pd.read_csv(os.path.join(folder_path, 'routes.txt'))
+            combined_data['routes'] = pd.concat([combined_data['routes'], routes])
+
+            trips = pd.read_csv(os.path.join(folder_path, 'trips.txt'))
+            combined_data['trips'] = pd.concat([combined_data['trips'], trips])
+
+            stop_times = pd.read_csv(os.path.join(folder_path, 'stop_times.txt'))
+            stop_times = validate_time_format(stop_times)
+            combined_data['stop_times'] = pd.concat([combined_data['stop_times'], stop_times])
+
+    for key, columns in column_mappings.items():
+        combined_data[key] = combined_data[key].drop_duplicates(subset=[columns[0]]).reset_index(drop=True)
+
+    for table, columns in column_mappings.items():
+        buffer = dataframe_to_csv_buffer(combined_data[table], columns)
+        
+        if table == 'stops':
+            sql = f'''
+                COPY {agency}_{quarter}_stops (stop_id, stop_name, stop_lat, stop_lon)
+                FROM STDIN WITH (FORMAT csv, DELIMITER ',', NULL '')
+            '''
+        else:
+            sql = f'''
+                COPY {agency}_{quarter}_{table} ({', '.join(columns)})
+                FROM STDIN WITH (FORMAT csv, DELIMITER ',', NULL '')
+            '''
+        cursor.copy_expert(sql, buffer)
+        print(f'loaded {table} for {quarter}')
+        return
+
+def update_stops_geom(cursor, table):
+    cursor.execute(f'''
+        UPDATE {table}
+        SET geom = ST_SetSRID(ST_MakePoint(stop_lon, stop_lat), 4326)
+        WHERE geom IS NULL;
+    ''')
+    print(f'updated geom column for {table}')
+
+if __name__ == '__main__':
+    try:
+        conn = psycopg2.connect(**DB_CONFIG)
+        cursor = conn.cursor()
+        
+        create_tables(cursor)
+        conn.commit()
+
+        for agency in AGENCIES:
+            for quarter in QUARTERS:
+                load_gtfs_data(cursor, agency, quarter)
+        conn.commit()
+
+        for agency in AGENCIES:
+            for quarter in QUARTERS:
+                update_stops_geom(cursor, f'{agency}_{quarter}_stops')
+        conn.commit()
+
+    except Exception as e:
+        print(f'error: {e}')
+
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()

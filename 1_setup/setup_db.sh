@@ -32,7 +32,5 @@ psql -d $DB_NAME -f populate_bikeshare_tables.sql --set ON_ERROR_STOP=on
 # load station information data
 python3 setup_station_info.py
 
-# create GTFS tables
-
-
-# load GTFS data
+# setup GTFS tables
+python3 setup_gtfs_data.py
