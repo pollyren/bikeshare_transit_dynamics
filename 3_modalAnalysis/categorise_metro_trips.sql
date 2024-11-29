@@ -211,48 +211,72 @@ SET classification = CASE
     -- MI-FLM
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q1 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.started_at BETWEEN 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time) 
-              AND 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time + INTERVAL '10 minutes')
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time)
-          AND date_to_quarter.duration_minutes <= 10
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q1 AS start_times,
+             metro_metro_times_q1 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time)
+        AND date_to_quarter.duration_minutes <= 10
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MI-FLM'
 
     -- MS
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q1 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q1 AS start_times,
+             metro_metro_times_q1 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MS'
 
     -- MI-LM
@@ -325,48 +349,72 @@ SET classification = CASE
     -- MI-FLM
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q2 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.started_at BETWEEN 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time) 
-              AND 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time + INTERVAL '10 minutes')
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time)
-          AND date_to_quarter.duration_minutes <= 10
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q2 AS start_times,
+             metro_metro_times_q2 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time)
+        AND date_to_quarter.duration_minutes <= 10
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MI-FLM'
 
     -- MS
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q2 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q2 AS start_times,
+             metro_metro_times_q2 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MS'
 
     -- MI-LM
@@ -439,48 +487,72 @@ SET classification = CASE
     -- MI-FLM
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q3 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.started_at BETWEEN 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time) 
-              AND 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time + INTERVAL '10 minutes')
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time)
-          AND date_to_quarter.duration_minutes <= 10
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q3 AS start_times,
+             metro_metro_times_q3 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time)
+        AND date_to_quarter.duration_minutes <= 10
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MI-FLM'
 
     -- MS
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q3 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q3 AS start_times,
+             metro_metro_times_q3 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MS'
 
     -- MI-LM
@@ -553,48 +625,72 @@ SET classification = CASE
     -- MI-FLM
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q4 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.started_at BETWEEN 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time) 
-              AND 
-              (date_trunc('day', date_to_quarter.started_at) + times.arrival_time + INTERVAL '10 minutes')
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.departure_time)
-          AND date_to_quarter.duration_minutes <= 10
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q4 AS start_times,
+             metro_metro_times_q4 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.departure_time)
+        AND date_to_quarter.duration_minutes <= 10
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MI-FLM'
 
     -- MS
     WHEN EXISTS (
         SELECT 1
-        FROM metro_metro_times_q4 AS times
-        WHERE date_to_quarter.start_station_id = times.metro_station_id
-          AND date_to_quarter.end_station_id = times.metro_station_id
-          AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
-              AND 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
-          AND CASE
-              WHEN date_to_quarter.day_of_week = 0 THEN times.sunday
-              WHEN date_to_quarter.day_of_week = 1 THEN times.monday
-              WHEN date_to_quarter.day_of_week = 2 THEN times.tuesday
-              WHEN date_to_quarter.day_of_week = 3 THEN times.wednesday
-              WHEN date_to_quarter.day_of_week = 4 THEN times.thursday
-              WHEN date_to_quarter.day_of_week = 5 THEN times.friday
-              WHEN date_to_quarter.day_of_week = 6 THEN times.saturday
-          END
+        FROM metro_metro_times_q4 AS start_times,
+             metro_metro_times_q4 AS end_times
+        WHERE date_to_quarter.start_station_id = start_times.metro_station_id
+        AND date_to_quarter.end_station_id = end_times.metro_station_id
+        AND date_to_quarter.started_at BETWEEN 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
+            AND 
+            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
+        AND date_to_quarter.ended_at BETWEEN 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
+            AND 
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+        AND CASE
+            WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
+            WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
+            WHEN date_to_quarter.day_of_week = 2 THEN start_times.tuesday
+            WHEN date_to_quarter.day_of_week = 3 THEN start_times.wednesday
+            WHEN date_to_quarter.day_of_week = 4 THEN start_times.thursday
+            WHEN date_to_quarter.day_of_week = 5 THEN start_times.friday
+            WHEN date_to_quarter.day_of_week = 6 THEN start_times.saturday
+        END
+        AND CASE
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 0 THEN end_times.sunday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 1 THEN end_times.monday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 2 THEN end_times.tuesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 3 THEN end_times.wednesday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 4 THEN end_times.thursday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 5 THEN end_times.friday
+            WHEN EXTRACT(DOW FROM date_to_quarter.ended_at) = 6 THEN end_times.saturday
+        END
     ) THEN 'MS'
 
     -- MI-LM
