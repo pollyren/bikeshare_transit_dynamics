@@ -54,7 +54,13 @@ if __name__ == '__main__':
 
             stations = []
             for station in data['data']['stations']:
-                station_id = station['station_id']
+                if city == 'la':
+                    station_id = station['station_id'].split('_')[-1]
+                else:
+                    try:
+                        station_id = station['short_name']
+                    except KeyError:
+                        continue    # lightweight stations do not have a short_name, excluding it here
                 name = station['name']
                 lat = station['lat']
                 lon = station['lon']
@@ -85,7 +91,7 @@ if __name__ == '__main__':
             print(f'{city} data loaded successfully.')
 
     except Exception as e:
-        print(f'Error: {e}')
+        print(f'error: {e}')
 
     finally:
         if cursor:
