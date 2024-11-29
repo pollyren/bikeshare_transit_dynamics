@@ -204,6 +204,7 @@ WITH date_to_quarter AS (
         EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 AS duration_minutes
     FROM divvy_trips
     WHERE started_at::DATE BETWEEN '2023-01-01' AND '2023-03-31'
+      AND start_station_id != end_station_id
 )
 UPDATE divvy_trips
 SET classification = CASE
@@ -240,7 +241,7 @@ SET classification = CASE
         WHERE date_to_quarter.start_station_id = times.divvy_station_id
           AND date_to_quarter.end_station_id = times.divvy_station_id
           AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '5 minutes') 
+              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
               AND 
               (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
           AND CASE
@@ -317,6 +318,7 @@ WITH date_to_quarter AS (
         EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 AS duration_minutes
     FROM divvy_trips
     WHERE started_at::DATE BETWEEN '2023-04-01' AND '2023-06-30'
+      AND start_station_id != end_station_id
 )
 UPDATE divvy_trips
 SET classification = CASE
@@ -353,7 +355,7 @@ SET classification = CASE
         WHERE date_to_quarter.start_station_id = times.divvy_station_id
           AND date_to_quarter.end_station_id = times.divvy_station_id
           AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '5 minutes') 
+              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
               AND 
               (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
           AND CASE
@@ -430,6 +432,7 @@ WITH date_to_quarter AS (
         EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 AS duration_minutes
     FROM divvy_trips
     WHERE started_at::DATE BETWEEN '2023-07-01' AND '2023-09-30'
+      AND start_station_id != end_station_id
 )
 UPDATE divvy_trips
 SET classification = CASE
@@ -466,7 +469,7 @@ SET classification = CASE
         WHERE date_to_quarter.start_station_id = times.divvy_station_id
           AND date_to_quarter.end_station_id = times.divvy_station_id
           AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '5 minutes') 
+              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
               AND 
               (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
           AND CASE
@@ -543,6 +546,7 @@ WITH date_to_quarter AS (
         EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 AS duration_minutes
     FROM divvy_trips
     WHERE started_at::DATE BETWEEN '2023-10-01' AND '2023-12-31'
+      AND start_station_id != end_station_id
 )
 UPDATE divvy_trips
 SET classification = CASE
@@ -579,7 +583,7 @@ SET classification = CASE
         WHERE date_to_quarter.start_station_id = times.divvy_station_id
           AND date_to_quarter.end_station_id = times.divvy_station_id
           AND date_to_quarter.ended_at BETWEEN 
-              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '5 minutes') 
+              (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time - INTERVAL '10 minutes') 
               AND 
               (date_trunc('day', date_to_quarter.ended_at) + times.arrival_time)
           AND CASE
