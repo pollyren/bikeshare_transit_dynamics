@@ -134,12 +134,31 @@ def load_gtfs_data(cursor, agency, quarter):
             stop_times = validate_time_format(stop_times)
             combined_data['stop_times'] = pd.concat([combined_data['stop_times'], stop_times])
 
-            try:
+            if 'lirr' in folder or 'mnr' in folder: # mta rail missing calendars, assume weekday schedules
+                calendar_entries = []
+                service_ids_from_trips = set(trips['service_id'])
+                for service_id in service_ids_from_trips:
+                    entry = {
+                        'service_id': service_id,
+                        'monday': 1,
+                        'tuesday': 1,
+                        'wednesday': 1,
+                        'thursday': 1,
+                        'friday': 1,
+                        'saturday': 0,
+                        'sunday': 0,
+                        'start_date': '20230101', 
+                        'end_date': '20231231'
+                    }
+                    calendar_entries.append(entry)
+                
+                calendar = pd.DataFrame(calendar_entries)
+                combined_data['calendar'] = pd.concat([combined_data['calendar'], calendar])
+
+            else:
                 calendar = pd.read_csv(os.path.join(folder_path, 'calendar.txt'))
                 combined_data['calendar'] = pd.concat([combined_data['calendar'], calendar])
-            except FileNotFoundError:
-                continue    # MTA LIRR does not have a calendar in GTFS files
-
+                
     for key, columns in column_mappings.items():
         combined_data[key] = combined_data[key].drop_duplicates(subset=[columns[0]]).reset_index(drop=True)
 
