@@ -187,6 +187,23 @@ ON
 ------ begin classification of trips as MI-FLM, MI-LM, MI-FM, MS or none
 ALTER TABLE metro_trips ADD COLUMN classification VARCHAR(10);
 
+CREATE INDEX idx_metro_trips_started_at ON metro_trips (started_at);
+CREATE INDEX idx_metro_trips_start_end_station ON metro_trips (start_station_id, end_station_id);
+CREATE INDEX idx_metro_trips_ride_id ON metro_trips (ride_id);
+
+CREATE INDEX idx_metro_metro_times_start_time_q1 ON metro_metro_times_q1 (metro_station_id, arrival_time);
+CREATE INDEX idx_metro_metro_times_end_time_q1 ON metro_metro_times_q1 (metro_station_id, departure_time);
+CREATE INDEX idx_metro_metro_times_day_q1 ON metro_metro_times_q1 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_metro_metro_times_start_time_q2 ON metro_metro_times_q2 (metro_station_id, arrival_time);
+CREATE INDEX idx_metro_metro_times_end_time_q2 ON metro_metro_times_q2 (metro_station_id, departure_time);
+CREATE INDEX idx_metro_metro_times_day_q2 ON metro_metro_times_q2 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_metro_metro_times_start_time_q3 ON metro_metro_times_q3 (metro_station_id, arrival_time);
+CREATE INDEX idx_metro_metro_times_end_time_q3 ON metro_metro_times_q3 (metro_station_id, departure_time);
+CREATE INDEX idx_metro_metro_times_day_q3 ON metro_metro_times_q3 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_metro_metro_times_start_time_q4 ON metro_metro_times_q4 (metro_station_id, arrival_time);
+CREATE INDEX idx_metro_metro_times_end_time_q4 ON metro_metro_times_q4 (metro_station_id, departure_time);
+CREATE INDEX idx_metro_metro_times_day_q4 ON metro_metro_times_q4 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+
 UPDATE metro_trips
 SET classification = 'none'
 WHERE start_station_id = end_station_id;

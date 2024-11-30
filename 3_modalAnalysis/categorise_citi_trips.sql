@@ -187,6 +187,23 @@ ON
 ------ begin classification of trips as MI-FLM, MI-LM, MI-FM, MS or none
 ALTER TABLE citi_trips ADD COLUMN classification VARCHAR(10);
 
+CREATE INDEX idx_citi_trips_started_at ON citi_trips (started_at);
+CREATE INDEX idx_citi_trips_start_end_station ON citi_trips (start_station_id, end_station_id);
+CREATE INDEX idx_citi_trips_ride_id ON citi_trips (ride_id);
+
+CREATE INDEX idx_citi_mta_times_start_time_q1 ON citi_mta_times_q1 (citi_station_id, arrival_time);
+CREATE INDEX idx_citi_mta_times_end_time_q1 ON citi_mta_times_q1 (citi_station_id, departure_time);
+CREATE INDEX idx_citi_mta_times_day_q1 ON citi_mta_times_q1 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_citi_mta_times_start_time_q2 ON citi_mta_times_q2 (citi_station_id, arrival_time);
+CREATE INDEX idx_citi_mta_times_end_time_q2 ON citi_mta_times_q2 (citi_station_id, departure_time);
+CREATE INDEX idx_citi_mta_times_day_q2 ON citi_mta_times_q2 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_citi_mta_times_start_time_q3 ON citi_mta_times_q3 (citi_station_id, arrival_time);
+CREATE INDEX idx_citi_mta_times_end_time_q3 ON citi_mta_times_q3 (citi_station_id, departure_time);
+CREATE INDEX idx_citi_mta_times_day_q3 ON citi_mta_times_q3 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+CREATE INDEX idx_citi_mta_times_start_time_q4 ON citi_mta_times_q4 (citi_station_id, arrival_time);
+CREATE INDEX idx_citi_mta_times_end_time_q4 ON citi_mta_times_q4 (citi_station_id, departure_time);
+CREATE INDEX idx_citi_mta_times_day_q4 ON citi_mta_times_q4 (sunday, monday, tuesday, wednesday, thursday, friday, saturday);
+
 UPDATE citi_trips
 SET classification = 'none'
 WHERE start_station_id = end_station_id;
