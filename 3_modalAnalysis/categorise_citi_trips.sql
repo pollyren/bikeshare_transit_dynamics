@@ -268,14 +268,10 @@ SET classification = CASE
              citi_mta_times_q1 AS end_times
         WHERE date_to_quarter.start_station_id = start_times.citi_station_id
         AND date_to_quarter.end_station_id = end_times.citi_station_id
-        AND date_to_quarter.started_at BETWEEN 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
-            AND 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
         AND date_to_quarter.ended_at BETWEEN 
             (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
             AND 
-            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time + INTERVAL '10 minutes')
         AND CASE
             WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
             WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
@@ -406,14 +402,10 @@ SET classification = CASE
              citi_mta_times_q2 AS end_times
         WHERE date_to_quarter.start_station_id = start_times.citi_station_id
         AND date_to_quarter.end_station_id = end_times.citi_station_id
-        AND date_to_quarter.started_at BETWEEN 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
-            AND 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
         AND date_to_quarter.ended_at BETWEEN 
             (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
             AND 
-            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time + INTERVAL '10 minutes')
         AND CASE
             WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
             WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
@@ -544,14 +536,10 @@ SET classification = CASE
              citi_mta_times_q3 AS end_times
         WHERE date_to_quarter.start_station_id = start_times.citi_station_id
         AND date_to_quarter.end_station_id = end_times.citi_station_id
-        AND date_to_quarter.started_at BETWEEN 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
-            AND 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
         AND date_to_quarter.ended_at BETWEEN 
             (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
             AND 
-            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time + INTERVAL '10 minutes')
         AND CASE
             WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
             WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
@@ -682,14 +670,10 @@ SET classification = CASE
              citi_mta_times_q4 AS end_times
         WHERE date_to_quarter.start_station_id = start_times.citi_station_id
         AND date_to_quarter.end_station_id = end_times.citi_station_id
-        AND date_to_quarter.started_at BETWEEN 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time) 
-            AND 
-            (date_trunc('day', date_to_quarter.started_at) + start_times.arrival_time + INTERVAL '10 minutes')
         AND date_to_quarter.ended_at BETWEEN 
             (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time - INTERVAL '10 minutes') 
             AND 
-            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time)
+            (date_trunc('day', date_to_quarter.ended_at) + end_times.arrival_time + INTERVAL '10 minutes')
         AND CASE
             WHEN date_to_quarter.day_of_week = 0 THEN start_times.sunday
             WHEN date_to_quarter.day_of_week = 1 THEN start_times.monday
