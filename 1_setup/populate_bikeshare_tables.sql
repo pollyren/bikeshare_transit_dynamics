@@ -34,7 +34,9 @@ WHERE
     AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station_id IS NOT NULL AND start_station_id <> ''
-    AND end_station_id IS NOT NULL AND end_station_id <> '';
+    AND end_station_id IS NOT NULL AND end_station_id <> ''
+    -- ensure ride does not start and end at same station
+    AND start_station_id != end_station_id;
 
 INSERT INTO citi_trips (
     ride_id, 
@@ -72,7 +74,9 @@ WHERE
     AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station_id IS NOT NULL AND start_station_id <> ''
-    AND end_station_id IS NOT NULL AND end_station_id <> '';
+    AND end_station_id IS NOT NULL AND end_station_id <> ''
+    -- ensure ride does not start and end at same station
+    AND start_station_id != end_station_id;
 
 INSERT INTO metro_trips (
     ride_id, 
@@ -110,7 +114,9 @@ WHERE
     AND EXTRACT(EPOCH FROM (end_time - start_time)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station IS NOT NULL AND start_station <> ''
-    AND end_station IS NOT NULL AND end_station <> '';
+    AND end_station IS NOT NULL AND end_station <> ''
+    -- ensure ride does not start and end at same station
+    AND start_station_id != end_station_id;
 
 DROP TABLE divvy_trips_raw;
 DROP TABLE citi_trips_raw;
