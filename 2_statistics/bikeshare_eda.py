@@ -2,40 +2,20 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
+from sqlalchemy import create_engine
 
 DF_TYPES = {
     'ride_id': 'object',
     'rideable_type': 'object',
-    # 'started_at': 'datetime64',
-    # 'ended_at': 'datetime64',
-    'start_station_name': 'object',
+    'started_at': 'datetime64[ns]',
+    'ended_at': 'datetime64[ns]',
     'start_station_id': 'object',
-    'end_station_name': 'object',
     'end_station_id': 'object',
     'start_lat': 'float64',
     'start_lng': 'float64',
     'end_lat': 'float64',
     'end_lng': 'float64',
     'member_casual': 'object'
-}
-
-DF_TYPES_LA = {
-    'trip_id': 'object',
-    'duration': 'int64',
-    # 'start_time': 'datetime64',
-    # 'end_time': 'datetime64',
-    'start_station': 'object',
-    'start_lat': 'float64',
-    'start_lon': 'float64',
-    'end_station': 'object',
-    'end_lat': 'float64',
-    'end_lon': 'float64',
-    'bike_id': 'object',
-    'plan_duration': 'object',
-    'trip_route_category': 'object',
-    'passholder_type': 'object',
-    'bike_type': 'object'
 }
 
 COLOURS = {
@@ -55,71 +35,32 @@ TIMES = {
 
 
 def read_and_filter_data():
-    cities = {'chicago': [], 'nyc': [], 'la': []}
-    cities_df = {}
-    for city in cities:
-        path = f'../data/bikeshare/{city}'
-        for file in os.listdir(path):
-            if file.endswith('.csv'):
-                cities[city].append(pd.read_csv(
-                    os.path.join(path, file), 
-                    dtype=DF_TYPES_LA if city == 'la' else DF_TYPES,
-                    parse_dates=['start_time', 'end_time'] if city == 'la' else ['started_at', 'ended_at']
-                ))
-        cities_df[city] = pd.concat(cities[city])
+    try:
+        engine = create_engine('postgresql://localhost:5432/bikeshare_transit_dynamics')
+        
+        queries = {
+            'Divvy': 'SELECT * FROM divvy_trips;',
+            'Citi': 'SELECT * FROM citi_trips;',
+            'Metro': 'SELECT * FROM metro_trips;'
+        }
+        
+        info = {}
 
-    for city, df in cities_df.items():
+        for provider, query in queries.items():
+            info[provider] = pd.read_sql(query, engine)
+            
+            for col, dtype in DF_TYPES.items():
+                if col in info[provider].columns:
+                    info[provider][col] = info[provider][col].astype(dtype)
+
+    except Exception as e:
+        print(f'error: {e}')
+
+    for provider, df in info.items():
+        print(provider)
         print(df.info())
 
-    divvy_raw = pd.DataFrame(
-        cities_df['chicago'][[
-            'ride_id', 'rideable_type', 'started_at', 'ended_at', 'start_station_id', 
-            'end_station_id', 'start_lat', 'start_lng', 'end_lat', 'end_lng', 'member_casual'
-        ]])
-
-    citi_raw = pd.DataFrame(
-        cities_df['nyc'][[
-            'ride_id', 'rideable_type', 'started_at', 'ended_at', 'start_station_id', 
-            'end_station_id', 'start_lat', 'start_lng', 'end_lat', 'end_lng', 'member_casual'
-        ]])
-
-    metro_raw = pd.DataFrame(
-        cities_df['la'][[
-            'trip_id', 'bike_type', 'start_time', 'end_time', 'start_station', 
-            'end_station', 'start_lat', 'start_lon', 'end_lat', 'end_lon', 'passholder_type'
-        ]].rename(columns={
-            'trip_id': 'ride_id',
-            'bike_type': 'rideable_type',
-            'start_time': 'started_at',
-            'end_time': 'ended_at', 
-            'start_station': 'start_station_id',
-            'end_station': 'end_station_id',
-            'start_lon': 'start_lng',
-            'end_lon': 'end_lng',
-            'passholder_type': 'member_casual'
-        }))
-    
-    def filter_and_clean_data(df):
-        # only consider 2023 data
-        df = df[df['started_at'].dt.year == 2023].copy()
-
-        # compute trip duration
-        df['trip_duration_min'] = (df['ended_at'] - df['started_at']).dt.total_seconds() / 60
-
-        # remove trips that don't start or end at a dock
-        df.dropna(subset=['start_station_id', 'end_station_id'], inplace=True)
-
-        # remove trips that start and end at the same station
-        df = df[df['start_station_id'] != df['end_station_id']]
-
-        # remove trips that are shorter than 1 min or longer than 90 min
-        return df[(df['trip_duration_min'] > 1) & (df['trip_duration_min'] <= 90)].copy()
-    
-    divvy = filter_and_clean_data(divvy_raw)
-    citi = filter_and_clean_data(citi_raw)
-    metro = filter_and_clean_data(metro_raw)
-
-    return divvy, citi, metro
+    return info
 
 
 def plot_monthly_usage(info):
@@ -222,8 +163,8 @@ def plot_trip_counts_heatmap(info):
     sns.heatmap(
         trip_count_norm, 
         annot=True, 
-        fmt=".1f",
-        cmap="Blues", 
+        fmt='.1f',
+        cmap='Blues', 
         cbar_kws={'label': 'Percentage (%)'}
     )
     plt.title('Relative trip counts by time of day', fontsize=16)
@@ -241,7 +182,7 @@ def plot_trip_counts_hourly_heatmap(info):
         trip_counts.append(count)
 
     trip_count_df = pd.DataFrame(trip_counts, index=list(info.keys())).T
-    trip_count_df.index.name = "Hour"
+    trip_count_df.index.name = 'Hour'
 
     trip_count_norm = trip_count_df.div(trip_count_df.sum(axis=0), axis=1) * 100
 
@@ -249,8 +190,8 @@ def plot_trip_counts_hourly_heatmap(info):
     sns.heatmap(
         trip_count_norm, 
         annot=True, 
-        fmt=".1f", 
-        cmap="Blues", 
+        fmt='.1f', 
+        cmap='Blues', 
         cbar_kws={'label': 'Percentage (%)'}
     )
     plt.title('Relative trip counts by hour', fontsize=16)
@@ -262,14 +203,11 @@ def plot_trip_counts_hourly_heatmap(info):
 
 
 if __name__ == '__main__':
-    divvy, citi, metro = read_and_filter_data()
-    info = {
-        'Divvy': divvy,
-        'Citi': citi,
-        'Metro': metro
-    }
+    info = read_and_filter_data()
 
     for provider, df in info.items():
+        df['trip_duration_min'] = (df['ended_at'] - df['started_at']).dt.total_seconds() / 60
+
         print(provider)
         print(df.info())
 
