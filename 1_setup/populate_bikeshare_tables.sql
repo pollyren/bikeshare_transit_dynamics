@@ -29,8 +29,11 @@ SELECT
     ST_SetSRID(ST_MakePoint(end_lng, end_lat), 4326)
 FROM divvy_trips_raw
 WHERE 
+    -- consider only 2023 trips
+    EXTRACT(YEAR FROM start_time) = 2023
+    AND EXTRACT(YEAR FROM end_time) = 2023
     -- ensure ride duration is between 1 and 90 minutes
-    EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 > 1
+    AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 > 1
     AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station_id IS NOT NULL AND start_station_id <> ''
@@ -69,8 +72,11 @@ SELECT
     ST_SetSRID(ST_MakePoint(end_lng, end_lat), 4326)
 FROM citi_trips_raw
 WHERE 
+    -- consider only 2023 trips
+    EXTRACT(YEAR FROM start_time) = 2023
+    AND EXTRACT(YEAR FROM end_time) = 2023
     -- ensure ride duration is between 1 and 90 minutes
-    EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 > 1
+    AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 > 1
     AND EXTRACT(EPOCH FROM (ended_at - started_at)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station_id IS NOT NULL AND start_station_id <> ''
@@ -109,8 +115,11 @@ SELECT
     ST_SetSRID(ST_MakePoint(end_lon, end_lat), 4326)
 FROM metro_trips_raw
 WHERE 
+    -- consider only 2023 trips
+    EXTRACT(YEAR FROM start_time) = 2023
+    AND EXTRACT(YEAR FROM end_time) = 2023
     -- ensure ride duration is between 1 and 90 minutes
-    EXTRACT(EPOCH FROM (end_time - start_time)) / 60 > 1
+    AND EXTRACT(EPOCH FROM (end_time - start_time)) / 60 > 1
     AND EXTRACT(EPOCH FROM (end_time - start_time)) / 60 < 90
     -- ensure ride starts and end at a station
     AND start_station IS NOT NULL AND start_station <> ''
