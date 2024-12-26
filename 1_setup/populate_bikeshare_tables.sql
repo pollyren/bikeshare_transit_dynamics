@@ -116,7 +116,17 @@ WHERE
     AND start_station IS NOT NULL AND start_station <> ''
     AND end_station IS NOT NULL AND end_station <> ''
     -- ensure ride does not start and end at same station
-    AND start_station_id != end_station_id;
+    AND start_station != end_station;
+
+-- some basic pre-filtering stats and cleanup raw tables
+\echo 'divvy'
+SELECT COUNT(*) FROM divvy_trips_raw;
+
+\echo 'citi'
+SELECT COUNT(*) FROM citi_trips_raw;
+
+\echo 'metro'
+SELECT COUNT(*) FROM metro_trips_raw;
 
 DROP TABLE divvy_trips_raw;
 DROP TABLE citi_trips_raw;
