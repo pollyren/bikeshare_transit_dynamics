@@ -2,13 +2,14 @@ import json
 import psycopg2
 from psycopg2.extras import execute_values
 import os
+from dotenv import load_dotenv
 
-import psycopg2.sql
+load_dotenv()
 
 DB_CONFIG = {
-    'dbname': 'bikeshare_transit_dynamics',
-    'host': 'localhost',
-    'port': 5432,
+    'dbname': os.getenv('DB_NAME'),
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT')
 }
 
 CITIES = {'chicago': 'divvy', 'la': 'metro', 'nyc': 'citi'}

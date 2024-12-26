@@ -2,12 +2,17 @@ import psycopg2
 import os
 import pandas as pd
 from io import StringIO
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DB_CONFIG = {
-    'dbname': 'bikeshare_transit_dynamics',
-    'host': 'localhost',
-    'port': 5432
+    'dbname': os.getenv('DB_NAME'),
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT')
 }
+
+YEAR = os.getenv('YEAR')
 
 QUARTERS = ['q1', 'q2', 'q3', 'q4']
 
@@ -147,8 +152,8 @@ def load_gtfs_data(cursor, agency, quarter):
                         'friday': 1,
                         'saturday': 0,
                         'sunday': 0,
-                        'start_date': '20230101', 
-                        'end_date': '20231231'
+                        'start_date': f'{YEAR}0101', 
+                        'end_date': f'{YEAR}1231'
                     }
                     calendar_entries.append(entry)
                 

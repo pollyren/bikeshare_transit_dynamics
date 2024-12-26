@@ -32,9 +32,9 @@ FROM divvy_trips_raw r
 JOIN divvy_stations s1 ON r.start_station_id = s1.station_id
 JOIN divvy_stations s2 ON r.end_station_id = s2.station_id
 WHERE 
-    -- consider only 2023 trips
-    EXTRACT(YEAR FROM r.started_at) = 2023
-    AND EXTRACT(YEAR FROM r.ended_at) = 2023
+    -- consider only trips for this year
+    EXTRACT(YEAR FROM r.started_at) = :trip_year
+    AND EXTRACT(YEAR FROM r.ended_at) = :trip_year
     -- ensure ride duration is between 1 and 90 minutes
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 > 1
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 < 90
@@ -75,9 +75,9 @@ FROM citi_trips_raw r
 JOIN citi_stations s1 ON r.start_station_id = s1.station_id
 JOIN citi_stations s2 ON r.end_station_id = s2.station_id
 WHERE 
-    -- consider only 2023 trips
-    EXTRACT(YEAR FROM r.started_at) = 2023
-    AND EXTRACT(YEAR FROM r.ended_at) = 2023
+    -- consider only trips for this year
+    EXTRACT(YEAR FROM r.started_at) = :trip_year
+    AND EXTRACT(YEAR FROM r.ended_at) = :trip_year
     -- ensure ride duration is between 1 and 90 minutes
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 > 1
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 < 90
@@ -118,9 +118,9 @@ FROM metro_trips_raw r
 JOIN metro_stations s1 ON r.start_station_id = s1.station_id
 JOIN metro_stations s2 ON r.end_station_id = s2.station_id
 WHERE 
-    -- consider only 2023 trips
-    EXTRACT(YEAR FROM r.started_at) = 2023
-    AND EXTRACT(YEAR FROM r.ended_at) = 2023
+    -- consider only trips for this year
+    EXTRACT(YEAR FROM r.started_at) = :trip_year
+    AND EXTRACT(YEAR FROM r.ended_at) = :trip_year
     -- ensure ride duration is between 1 and 90 minutes
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 > 1
     AND EXTRACT(EPOCH FROM (r.ended_at - r.started_at)) / 60 < 90
