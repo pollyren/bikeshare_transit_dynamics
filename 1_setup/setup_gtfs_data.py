@@ -1,5 +1,6 @@
 import psycopg2
 import os
+import sys
 import pandas as pd
 from io import StringIO
 from dotenv import load_dotenv
@@ -211,6 +212,7 @@ if __name__ == '__main__':
 
     except Exception as e:
         print(f'error: {e}')
+        sys.exit(1)
 
     finally:
         if conn:

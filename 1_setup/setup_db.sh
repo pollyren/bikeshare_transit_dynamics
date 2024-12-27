@@ -1,12 +1,14 @@
 #!/bin/bash
 
+set -e
+
 if [ -f ../.env ]; then
     export $(grep -v '^#' ../.env | xargs)
 fi
 
-# brew services restart postgresql@14
+brew services restart postgresql@14
 
-# sleep 10
+sleep 10
 
 if pg_isready -q && ! psql -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME"; then
     createdb "$DB_NAME"

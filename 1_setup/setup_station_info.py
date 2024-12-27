@@ -1,7 +1,9 @@
 import json
 import psycopg2
+import psycopg2.sql
 from psycopg2.extras import execute_values
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -93,6 +95,7 @@ if __name__ == '__main__':
 
     except Exception as e:
         print(f'error: {e}')
+        sys.exit(1)
 
     finally:
         if cursor:
