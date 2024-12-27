@@ -3,6 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+DB_URL = f'postgresql://{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}'
 
 DF_TYPES = {
     'ride_id': 'object',
@@ -34,9 +40,9 @@ TIMES = {
 }
 
 
-def read_and_filter_data():
+def read_data():
     try:
-        engine = create_engine('postgresql://localhost:5432/bikeshare_transit_dynamics')
+        engine = create_engine(DB_URL)
         
         queries = {
             'Divvy': 'SELECT * FROM divvy_trips;',
@@ -203,7 +209,7 @@ def plot_trip_counts_hourly_heatmap(info):
 
 
 if __name__ == '__main__':
-    info = read_and_filter_data()
+    info = read_data()
 
     for provider, df in info.items():
         df['trip_duration_min'] = (df['ended_at'] - df['started_at']).dt.total_seconds() / 60
