@@ -6,7 +6,7 @@ DECLARE
         'mta_q', 
         'metro_q',
         'divvy_cta',
-        'mta_citi',
+        'citi_mta',
         'metro_metro'
     ];
 BEGIN
