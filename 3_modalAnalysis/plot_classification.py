@@ -8,43 +8,11 @@ from selenium import webdriver
 from PIL import Image
 import time
 import os
+import sys
 
-MODAL_COLOURS = {
-    'MI-FLM': '#0B5563', 
-    'MI-FM': '#118A8F', 
-    'MI-LM': '#17BEBB', 
-    'MS': '#E4572E', 
-    'none': 'lightgrey'
-} 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-CITY_COLOURS = {
-    'Chicago': '#477998', 
-    'NYC': '#841C26', 
-    'LA': '#87AC5D'
-}
-
-CITIES = {
-    'Chicago': 'Chicago',
-    'NYC': 'New York City',
-    'LA': 'Los Angeles'
-}
-
-CITY_TO_PROVIDER_TITLE = {
-    'Chicago': 'Divvy + CTA', 
-    'NYC': 'Citi Bike + MTA', 
-    'LA': 'Metro Bikeshare + Metro'
-}
-
-MONTHS = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-]
-
-CLASSIFICATIONS = {
-    'mi': ['MI-FLM', 'MI-FM', 'MI-LM'],
-    'ms': ['MS'],
-    'none': ['none']
-}
+from constants import *
 
 CURRENT_DIR = os.getcwd()
 CLASSIFIED_DIR = '../data/classified'

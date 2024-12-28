@@ -5,6 +5,11 @@ import seaborn as sns
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from constants import *
 
 load_dotenv()
 
@@ -22,21 +27,6 @@ DF_TYPES = {
     'end_lat': 'float64',
     'end_lng': 'float64',
     'member_casual': 'object'
-}
-
-COLOURS = {
-    'Divvy': '#477998',
-    'Citi': '#841C26',
-    'Metro': '#87AC5D'
-}
-
-TIMES = {
-    'Early morning (12 AM - 4 AM)': (0, 4),
-    'Morning (4 AM - 8 AM)': (4, 8),
-    'Late morning (8 AM - 12PM)': (8, 12),
-    'Afternoon (12 PM - 4 PM)': (12, 16),
-    'Evening (4 PM - 8 PM)': (16, 20),
-    'Night (8 PM - 12 AM)': (20, 24),
 }
 
 
@@ -86,7 +76,7 @@ def plot_monthly_usage(info):
             label=provider, 
             marker='o', 
             linestyle='-', 
-            color=COLOURS[provider]
+            color=CITY_COLOURS[PROVIDER_TO_CITY[provider]]
         )
 
     plt.title('Monthly bikeshare trips (2023)', fontsize=16)
@@ -140,7 +130,7 @@ def plot_trip_duration(info):
             avg_duration_df[provider],
             width=width,
             label=provider,
-            color=COLOURS[provider]
+            color=CITY_COLOURS[PROVIDER_TO_CITY[provider]]
         )
 
     plt.title('Average trip duration by time of day', fontsize=16)
