@@ -29,10 +29,10 @@ CITIES = {
     'LA': 'Los Angeles'
 }
 
-CITYFULL_TO_PROVIDER = {
+CITY_TO_PROVIDER_TITLE = {
     'Chicago': 'Divvy + CTA', 
-    'New York City': 'Citi Bike + MTA', 
-    'Los Angeles': 'Metro Bikeshare + Metro'
+    'NYC': 'Citi Bike + MTA', 
+    'LA': 'Metro Bikeshare + Metro'
 }
 
 MONTHS = [
@@ -82,7 +82,7 @@ def plot_hourly_classification(info):
 
     for ax, city in zip(axes, CITIES):
         df = info[city]
-        title = f'{city} ({CITYFULL_TO_PROVIDER[CITIES[city]]})'
+        title = f'{CITIES[city]} ({CITY_TO_PROVIDER_TITLE[city]})'
 
         df['hour'] = pd.to_datetime(df['started_at'], errors='coerce').dt.hour
         df = df.dropna(subset=['hour'])
@@ -135,7 +135,7 @@ def plot_monthly_classification(info):
 
     for ax, city in zip(axes, CITIES):
         df = info[city]
-        title = f'{city} ({CITYFULL_TO_PROVIDER[CITIES[city]]})'
+        title = f'{CITIES[city]} ({CITY_TO_PROVIDER_TITLE[city]})'
 
         df['month'] = pd.to_datetime(df['started_at'], errors='coerce').dt.month
         df = df.dropna(subset=['month'])
@@ -309,7 +309,7 @@ def combine_heatmaps(classification):
         
         ax.imshow(img)
         ax.axis('off')
-        ax.set_title(f'{city} ({CITYFULL_TO_PROVIDER[CITIES[city]]})', fontsize=14)
+        ax.set_title(f'{CITIES[city]} ({CITY_TO_PROVIDER_TITLE[city]})', fontsize=14)
 
     cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])
     norm = Normalize(vmin=0, vmax=100)
