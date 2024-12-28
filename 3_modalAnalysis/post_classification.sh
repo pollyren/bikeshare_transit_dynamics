@@ -7,9 +7,11 @@ if [ -f ../.env ]; then
 fi
 
 # save results of categorisation to csv in data/classified
-psql -d $DB_NAME -c "COPY divvy_trips TO '../data/classified/divvy_trips.csv' WITH CSV HEADER;"
-psql -d $DB_NAME -c "COPY citi_trips TO '../data/classified/citi_trips.csv' WITH CSV HEADER;"
-psql -d $DB_NAME -c "COPY metro_trips TO '../data/classified/metro_trips.csv' WITH CSV HEADER;"
+mkdir -p ../data/classified
+
+psql -d $DB_NAME -c "COPY divvy_trips TO '$(realpath ../data/classified)/divvy_trips.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY citi_trips TO '$(realpath ../data/classified)/citi_trips.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY metro_trips TO '$(realpath ../data/classified)/metro_trips.csv' WITH CSV HEADER;"
 
 # generate plots of classification results
 python3 plot_classification.py
