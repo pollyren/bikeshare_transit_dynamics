@@ -40,3 +40,9 @@ python3 setup_gtfs_data.py
 
 # load bikeshare data into final tables
 psql -d $DB_NAME -v trip_year=$YEAR -f populate_bikeshare_tables.sql --set ON_ERROR_STOP=on
+
+# load shapefiles
+SHP_PATH='../data/shapefiles'
+shp2pgsql -I -s 4326 $SHP_PATH/chicago/tl_2023_17_tract.shp census_tracts | psql -d $DB_NAME
+shp2pgsql -I -s 4326 -a $SHP_PATH/nyc/tl_2023_36_tract.shp census_tracts | psql -d $DB_NAME
+shp2pgsql -I -s 4326 -a $SHP_PATH/la/tl_2023_06_tract.shp census_tracts | psql -d $DB_NAME
