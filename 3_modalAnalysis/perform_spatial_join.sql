@@ -53,3 +53,9 @@ UPDATE metro_trips
 SET end_tract = census_tracts.geoid
 FROM census_tracts
 WHERE ST_Intersects(metro_trips.end_geom, census_tracts.geom);
+
+
+----- remove rows that are outside any valid census tracts
+DELETE FROM divvy_trips WHERE start_tract IS NULL OR end_tract IS NULL;
+DELETE FROM citi_trips WHERE start_tract IS NULL OR end_tract IS NULL;
+DELETE FROM metro_trips WHERE start_tract IS NULL OR end_tract IS NULL;
