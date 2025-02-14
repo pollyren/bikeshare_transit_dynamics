@@ -1,7 +1,7 @@
 ----- divvy
-CREATE TABLE divvy_trip_aggregates_start AS
+CREATE TABLE divvy_trips_aggregates_start AS
 SELECT
-    start_tract,
+    start_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
@@ -10,9 +10,9 @@ SELECT
 FROM divvy_trips
 GROUP BY start_tract;
 
-CREATE TABLE divvy_trip_aggregates_end AS
+CREATE TABLE divvy_trips_aggregates_end AS
 SELECT
-    end_tract,
+    end_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
@@ -23,9 +23,9 @@ GROUP BY end_tract;
 
 
 ----- citi
-CREATE TABLE citi_trip_aggregates_start AS
+CREATE TABLE citi_trips_aggregates_start AS
 SELECT
-    start_tract,
+    start_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
@@ -34,9 +34,9 @@ SELECT
 FROM citi_trips
 GROUP BY start_tract;
 
-CREATE TABLE citi_trip_aggregates_end AS
+CREATE TABLE citi_trips_aggregates_end AS
 SELECT
-    end_tract,
+    end_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
@@ -47,9 +47,9 @@ GROUP BY end_tract;
 
 
 ----- metro
-CREATE TABLE metro_trip_aggregates_start AS
+CREATE TABLE metro_trips_aggregates_start AS
 SELECT
-    start_tract,
+    start_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
@@ -58,9 +58,9 @@ SELECT
 FROM metro_trips
 GROUP BY start_tract;
 
-CREATE TABLE metro_trip_aggregates_end AS
+CREATE TABLE metro_trips_aggregates_end AS
 SELECT
-    end_tract,
+    end_tract AS tract,
     SUM(CASE WHEN classification = 'MI-FLM' THEN 1 ELSE 0 END) AS mi_flm_count,
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
