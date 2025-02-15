@@ -6,7 +6,7 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM divvy_trips
 GROUP BY start_tract;
 
@@ -17,7 +17,7 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM divvy_trips
 GROUP BY end_tract;
 
@@ -30,7 +30,7 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM citi_trips
 GROUP BY start_tract;
 
@@ -41,7 +41,7 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM citi_trips
 GROUP BY end_tract;
 
@@ -54,7 +54,7 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM metro_trips
 GROUP BY start_tract;
 
@@ -65,6 +65,6 @@ SELECT
     SUM(CASE WHEN classification = 'MI_FM' THEN 1 ELSE 0 END) AS mi_fm_count,
     SUM(CASE WHEN classification = 'MI-LM' THEN 1 ELSE 0 END) AS mi_lm_count,
     SUM(CASE WHEN classification = 'MS' THEN 1 ELSE 0 END) AS ms_count,
-    SUM(CASE WHEN classification = 'NONE' THEN 1 ELSE 0 END) AS none_count
+    SUM(CASE WHEN classification = 'none' THEN 1 ELSE 0 END) AS none_count
 FROM metro_trips
 GROUP BY end_tract;
