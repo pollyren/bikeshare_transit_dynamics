@@ -37,11 +37,11 @@ psql -d $DB_NAME -c "
     );
 
     CREATE TABLE IF NOT EXISTS nanda_street_connectivity (
-        TRACT_FIPS20 TEXT, TEXTDENSITY TEXT, STRNETDENSITY TEXT, CONNODERATIO TEXT
+        TRACT_FIPS20 TEXT, INTDENSITY TEXT, STRNETDENSITY TEXT, CONNODERATIO TEXT
     );
 
     CREATE TABLE IF NOT EXISTS nanda_traffic (
-        TRACT_FIPS20 TEXT, MEAN_TRAFFIC TEXT, COUNT_TEXTERSECTIONS TEXT
+        TRACT_FIPS20 TEXT, MEAN_TRAFFIC TEXT, COUNT_INTERSECTIONS TEXT
     );
 "
 
@@ -97,3 +97,18 @@ cat ../data/variables/nanda-roads.tsv | \
 tr -s '\t' ',' | \
 cut -d',' -f1,2,9 | \
 psql -d $DB_NAME -c "\COPY nanda_roads FROM stdin WITH CSV HEADER NULL '';"
+
+
+# join regression data
+psql -d $DB_NAME -f combine_regression_data.sql
+
+
+# write aggregated files to data/final
+mkdir -p ../data/final
+
+psql -d $DB_NAME -c "COPY divvy_trips_aggregates_start TO '$(realpath ../data/final)/divvy_start.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY divvy_trips_aggregates_end TO '$(realpath ../data/final)/divvy_end.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY citi_trips_aggregates_start TO '$(realpath ../data/final)/citi_start.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY citi_trips_aggregates_end TO '$(realpath ../data/final)/citi_end.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY metro_trips_aggregates_start TO '$(realpath ../data/final)/metro_start.csv' WITH CSV HEADER;"
+psql -d $DB_NAME -c "COPY metro_trips_aggregates_end TO '$(realpath ../data/final)/metro_end.csv' WITH CSV HEADER;"
