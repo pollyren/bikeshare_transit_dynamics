@@ -13,7 +13,7 @@ def main():
 
     for df_name in df_start_names + df_end_names:
         df = dfs[df_name]
-        stats = df.agg(['mean', 'median', 'max', 'min'])
+        stats = df.agg(['mean', 'std', 'median', 'max', 'min'])
 
         with open("output/variable_stats.csv", "a") as f:
             f.write(f"\n{df_name}\n")
