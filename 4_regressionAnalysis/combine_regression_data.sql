@@ -2,6 +2,7 @@
 -- standardise geoid for joining, only keep state, county, tract
 ALTER TABLE latch_2017 RENAME COLUMN geocode TO geo_id;
 
+UPDATE latch_2017 SET geo_id = LPAD(RIGHT(geo_id, 11), 11, '0');
 UPDATE acs5y2023_socioeconomic SET geo_id = LPAD(RIGHT(geo_id, 11), 11, '0');
 UPDATE acs5y2023_employment SET geo_id = LPAD(RIGHT(geo_id, 11), 11, '0');
 UPDATE acs5y2023_demographic SET geo_id = LPAD(RIGHT(geo_id, 11), 11, '0');
