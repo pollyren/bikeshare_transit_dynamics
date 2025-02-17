@@ -5,14 +5,15 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
 
-def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str):
+def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str, ax_mi, ax_ms):
     df_numeric = df.select_dtypes(include=['number']).dropna()
 
     mi_y = df_numeric["mi_count"] / df_numeric["num_trips"]
     ms_y = df_numeric["ms_count"] / df_numeric["num_trips"]
 
     X = df_numeric.iloc[:, 5:-2]
-    X = X[["median_age", "median_household_income", "intersection_density", "avg_traffic", "num_jobs"]]
+    # X = X[["median_age", "median_household_income", "intersection_density", "avg_traffic", "num_jobs"]]
+    X = X.drop(columns=["prop_commute_drove", "prop_commute_carpooled", "prop_commute_pubtransit", "prop_commute_walked", "mean_commute_time"])
 
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
@@ -30,25 +31,19 @@ def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str):
         f.write(f"\nmodal integration, {df_name} (alpha={mi_model.alpha_}):\n")
         f.write(mi_coefs.to_string(index=False))
 
-        f.write(f"\nmodal substitution, {df_name} (alpha={ms_model.alpha_}):\n")
+        f.write(f"\n\nmodal substitution, {df_name} (alpha={ms_model.alpha_}):\n")
         f.write(ms_coefs.to_string(index=False))
         f.write("\n-----\n")
 
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x=mi_coefs["Coefficient"], y=mi_coefs["Feature"])
-    plt.title(f"ridge regression coefficients, {df_name} (MI)")
-    plt.xlabel("coefficient")
-    plt.ylabel("feature")
-    plt.tight_layout()
-    plt.savefig(f"output/{df_name}_mi_ridge_coefs.png")
+    sns.barplot(x=mi_coefs["Coefficient"], y=mi_coefs["Feature"], ax=ax_mi)
+    ax_mi.set_title(f"{df_name} (MI)")
+    ax_mi.set_xlabel("coefficient")
+    ax_mi.set_ylabel("feature")
 
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x=ms_coefs["Coefficient"], y=ms_coefs["Feature"])
-    plt.title(f"ridge regression coefficients, {df_name} (MS)")
-    plt.xlabel("coefficient")
-    plt.ylabel("feature")
-    plt.tight_layout()
-    plt.savefig(f"output/{df_name}_ms_ridge_coefs.png")
+    sns.barplot(x=ms_coefs["Coefficient"], y=ms_coefs["Feature"], ax=ax_ms)
+    ax_ms.set_title(f"{df_name} (MS)")
+    ax_ms.set_xlabel("coefficient")
+    ax_ms.set_ylabel("feature")
 
 
 def main():
@@ -66,11 +61,27 @@ def main():
     with open("output/ridge_results_end.txt", "w"):
         pass
 
-    for df_name in df_start_names:
-        run_ridge_regression(dfs[df_name], df_name, "output/ridge_results_start.txt")
+    num_rows_start = len(df_start_names)
+    fig_start, axes_start = plt.subplots(num_rows_start, 2, figsize=(10, 5 * num_rows_start))
+    fig_start.suptitle("Ridge regression coefficients, trip origin", fontsize=16, y=0.99)
+    axes_start = axes_start.flatten()
 
-    for df_name in df_end_names:
-        run_ridge_regression(dfs[df_name], df_name, "output/ridge_results_end.txt")
+    for i, df_name in enumerate(df_start_names):
+        run_ridge_regression(dfs[df_name], df_name, "output/ridge_results_start.txt", axes_start[i * 2], axes_start[i * 2 + 1])
+
+    plt.tight_layout()
+    plt.savefig("output/ridge_coefs_start.png", bbox_inches="tight")
+
+    num_rows_end = len(df_end_names)
+    fig_end, axes_end = plt.subplots(num_rows_end, 2, figsize=(10, 5 * num_rows_end))
+    fig_end.suptitle("Ridge regression coefficients, trip destination", fontsize=16, y=0.99)
+    axes_end = axes_end.flatten()
+
+    for i, df_name in enumerate(df_end_names):
+        run_ridge_regression(dfs[df_name], df_name, "output/ridge_results_end.txt", axes_end[i * 2], axes_end[i * 2 + 1])
+
+    plt.tight_layout()
+    plt.savefig("output/ridge_coefs_end.png", bbox_inches="tight")
 
 if __name__ == "__main__":
     main()
