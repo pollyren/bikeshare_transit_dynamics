@@ -2,257 +2,242 @@
 modal integration, divvy_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.531
-Model:                            OLS   Adj. R-squared (uncentered):              0.519
-Method:                 Least Squares   F-statistic:                              43.97
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                    2.57e-52
-Time:                        19:48:17   Log-Likelihood:                          394.52
-No. Observations:                 358   AIC:                                     -771.0
-Df Residuals:                     349   BIC:                                     -736.1
-Df Model:                           9                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.509
+Model:                            OLS   Adj. R-squared (uncentered):              0.499
+Method:                 Least Squares   F-statistic:                              51.94
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                    1.53e-50
+Time:                        21:58:37   Log-Likelihood:                          386.11
+No. Observations:                 358   AIC:                                     -758.2
+Df Residuals:                     351   BIC:                                     -731.1
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-unemployment_rate            0.0016      0.001      2.659      0.008       0.000       0.003
-prop_no_vehicles          5.473e-05   1.02e-05      5.357      0.000    3.46e-05    7.48e-05
-households_with_children -3.383e-06   8.37e-06     -0.404      0.686   -1.98e-05    1.31e-05
-prop_college_grad            0.0920      0.018      5.015      0.000       0.056       0.128
-prop_prim_sec_roads          0.0665      0.085      0.785      0.433      -0.100       0.233
-intersection_density     -4.613e-05    2.9e-05     -1.593      0.112      -0.000    1.08e-05
-avg_traffic               2.712e-07   1.55e-07      1.754      0.080   -3.28e-08    5.75e-07
-num_intersections         4.357e-05   9.32e-05      0.467      0.641      -0.000       0.000
-num_jobs                  3.636e-07   2.66e-07      1.365      0.173    -1.6e-07    8.87e-07
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income  4.478e-07   1.16e-07      3.849      0.000    2.19e-07    6.77e-07
+unemployment_rate           0.0012      0.001      2.002      0.046     2.2e-05       0.002
+prop_no_vehicles         7.202e-05   9.14e-06      7.881      0.000     5.4e-05       9e-05
+intersection_density    -3.571e-05   2.85e-05     -1.252      0.212   -9.18e-05    2.04e-05
+avg_traffic              3.126e-07   1.51e-07      2.069      0.039    1.55e-08     6.1e-07
+num_intersections       -7.277e-06   8.08e-05     -0.090      0.928      -0.000       0.000
+num_jobs                 3.056e-07   2.64e-07      1.156      0.249   -2.14e-07    8.25e-07
 ==============================================================================
-Omnibus:                      252.202   Durbin-Watson:                   1.968
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2900.762
-Skew:                           2.894   Prob(JB):                         0.00
-Kurtosis:                      15.687   Cond. No.                     7.12e+05
+Omnibus:                      245.825   Durbin-Watson:                   2.013
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2674.237
+Skew:                           2.816   Prob(JB):                         0.00
+Kurtosis:                      15.148   Cond. No.                     1.23e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 7.12e+05. This might indicate that there are
+[3] The condition number is large, 1.23e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 
 
 modal substitution, divvy_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.369
-Model:                            OLS   Adj. R-squared (uncentered):              0.353
-Method:                 Least Squares   F-statistic:                              22.67
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                    2.59e-30
-Time:                        19:48:17   Log-Likelihood:                          112.12
-No. Observations:                 358   AIC:                                     -206.2
-Df Residuals:                     349   BIC:                                     -171.3
-Df Model:                           9                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.361
+Model:                            OLS   Adj. R-squared (uncentered):              0.348
+Method:                 Least Squares   F-statistic:                              28.29
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                    8.05e-31
+Time:                        21:58:37   Log-Likelihood:                          109.80
+No. Observations:                 358   AIC:                                     -205.6
+Df Residuals:                     351   BIC:                                     -178.4
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-unemployment_rate            0.0029      0.001      2.163      0.031       0.000       0.006
-prop_no_vehicles             0.0001   2.25e-05      5.460      0.000    7.86e-05       0.000
-households_with_children  5.975e-06   1.84e-05      0.324      0.746   -3.03e-05    4.22e-05
-prop_college_grad            0.1431      0.040      3.545      0.000       0.064       0.222
-prop_prim_sec_roads          0.2753      0.186      1.477      0.141      -0.091       0.642
-intersection_density        -0.0001   6.37e-05     -2.047      0.041      -0.000   -5.13e-06
-avg_traffic               5.961e-07    3.4e-07      1.752      0.081    -7.3e-08    1.27e-06
-num_intersections           -0.0003      0.000     -1.433      0.153      -0.001       0.000
-num_jobs                  4.189e-07   5.86e-07      0.715      0.475   -7.34e-07    1.57e-06
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income  9.462e-07   2.52e-07      3.759      0.000    4.51e-07    1.44e-06
+unemployment_rate           0.0027      0.001      2.022      0.044     7.4e-05       0.005
+prop_no_vehicles            0.0002   1.98e-05      7.598      0.000       0.000       0.000
+intersection_density       -0.0002   6.17e-05     -2.441      0.015      -0.000   -2.93e-05
+avg_traffic              7.371e-07   3.27e-07      2.255      0.025    9.42e-08    1.38e-06
+num_intersections          -0.0003      0.000     -1.882      0.061      -0.001    1.48e-05
+num_jobs                  2.15e-07   5.72e-07      0.376      0.707    -9.1e-07    1.34e-06
 ==============================================================================
-Omnibus:                      168.143   Durbin-Watson:                   1.988
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              693.587
-Skew:                           2.086   Prob(JB):                    2.45e-151
-Kurtosis:                       8.394   Cond. No.                     7.12e+05
+Omnibus:                      160.691   Durbin-Watson:                   1.968
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              593.223
+Skew:                           2.035   Prob(JB):                    1.52e-129
+Kurtosis:                       7.818   Cond. No.                     1.23e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 7.12e+05. This might indicate that there are
+[3] The condition number is large, 1.23e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 vif:
-                Variable      VIF
-       unemployment_rate 2.625806
-        prop_no_vehicles 2.512283
-households_with_children 4.309886
-       prop_college_grad 4.646954
-     prop_prim_sec_roads 1.645555
-    intersection_density 5.826700
-             avg_traffic 1.678959
-       num_intersections 5.382993
-                num_jobs 1.255991
+               Variable      VIF
+median_household_income 5.106010
+      unemployment_rate 2.543437
+       prop_no_vehicles 1.928359
+   intersection_density 5.424645
+            avg_traffic 1.539090
+      num_intersections 3.874088
+               num_jobs 1.187404
 -----
 
 modal integration, citi_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.589
-Model:                            OLS   Adj. R-squared (uncentered):              0.581
-Method:                 Least Squares   F-statistic:                              68.61
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                    1.52e-77
-Time:                        19:48:17   Log-Likelihood:                          331.34
-No. Observations:                 439   AIC:                                     -644.7
-Df Residuals:                     430   BIC:                                     -607.9
-Df Model:                           9                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.585
+Model:                            OLS   Adj. R-squared (uncentered):              0.578
+Method:                 Least Squares   F-statistic:                              86.88
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                    2.08e-78
+Time:                        21:58:37   Log-Likelihood:                          328.78
+No. Observations:                 439   AIC:                                     -643.6
+Df Residuals:                     432   BIC:                                     -615.0
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-unemployment_rate            0.0053      0.001      4.957      0.000       0.003       0.007
-prop_no_vehicles          2.555e-05   1.18e-05      2.169      0.031     2.4e-06    4.87e-05
-households_with_children  1.617e-05   9.76e-06      1.657      0.098   -3.01e-06    3.54e-05
-prop_college_grad           -0.0036      0.026     -0.138      0.891      -0.055       0.047
-prop_prim_sec_roads         -0.1083      0.079     -1.378      0.169      -0.263       0.046
-intersection_density         0.0001    4.6e-05      2.302      0.022    1.55e-05       0.000
-avg_traffic               9.873e-08    3.5e-07      0.282      0.778    -5.9e-07    7.87e-07
-num_intersections           -0.0002      0.001     -0.362      0.718      -0.001       0.001
-num_jobs                  1.108e-05   3.33e-06      3.323      0.001    4.53e-06    1.76e-05
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income -6.981e-08   1.34e-07     -0.520      0.603   -3.34e-07    1.94e-07
+unemployment_rate           0.0058      0.001      5.569      0.000       0.004       0.008
+prop_no_vehicles         3.937e-05   8.81e-06      4.467      0.000     2.2e-05    5.67e-05
+intersection_density        0.0001   4.63e-05      2.294      0.022    1.52e-05       0.000
+avg_traffic             -4.353e-08   3.36e-07     -0.129      0.897   -7.05e-07    6.18e-07
+num_intersections          -0.0002      0.001     -0.320      0.749      -0.001       0.001
+num_jobs                 1.114e-05   3.34e-06      3.337      0.001    4.58e-06    1.77e-05
 ==============================================================================
-Omnibus:                       79.431   Durbin-Watson:                   1.905
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              120.153
-Skew:                           1.179   Prob(JB):                     8.11e-27
-Kurtosis:                       4.006   Cond. No.                     3.03e+05
+Omnibus:                       75.676   Durbin-Watson:                   1.899
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              111.957
+Skew:                           1.145   Prob(JB):                     4.88e-25
+Kurtosis:                       3.935   Cond. No.                     1.57e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 3.03e+05. This might indicate that there are
+[3] The condition number is large, 1.57e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 
 
 modal substitution, citi_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.279
-Model:                            OLS   Adj. R-squared (uncentered):              0.264
-Method:                 Least Squares   F-statistic:                              18.47
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                    4.64e-26
-Time:                        19:48:17   Log-Likelihood:                          407.53
-No. Observations:                 439   AIC:                                     -797.1
-Df Residuals:                     430   BIC:                                     -760.3
-Df Model:                           9                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.280
+Model:                            OLS   Adj. R-squared (uncentered):              0.268
+Method:                 Least Squares   F-statistic:                              23.99
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                    1.39e-27
+Time:                        21:58:37   Log-Likelihood:                          407.87
+No. Observations:                 439   AIC:                                     -801.7
+Df Residuals:                     432   BIC:                                     -773.1
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-unemployment_rate            0.0048      0.001      5.414      0.000       0.003       0.007
-prop_no_vehicles          5.525e-06    9.9e-06      0.558      0.577   -1.39e-05     2.5e-05
-households_with_children   7.01e-07    8.2e-06      0.085      0.932   -1.54e-05    1.68e-05
-prop_college_grad           -0.0216      0.022     -0.989      0.323      -0.064       0.021
-prop_prim_sec_roads          0.0727      0.066      1.099      0.272      -0.057       0.203
-intersection_density      1.181e-06   3.87e-05      0.031      0.976   -7.49e-05    7.73e-05
-avg_traffic              -1.578e-07   2.95e-07     -0.536      0.593   -7.37e-07    4.21e-07
-num_intersections            0.0001      0.001      0.231      0.817      -0.001       0.001
-num_jobs                  4.365e-06    2.8e-06      1.557      0.120   -1.14e-06    9.87e-06
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income -2.026e-07   1.12e-07     -1.808      0.071   -4.23e-07    1.76e-08
+unemployment_rate           0.0047      0.001      5.482      0.000       0.003       0.006
+prop_no_vehicles         5.639e-06   7.36e-06      0.766      0.444   -8.83e-06    2.01e-05
+intersection_density     2.001e-05   3.86e-05      0.518      0.605   -5.59e-05    9.59e-05
+avg_traffic             -5.521e-08   2.81e-07     -0.197      0.844   -6.07e-07    4.97e-07
+num_intersections           0.0004      0.001      0.717      0.474      -0.001       0.001
+num_jobs                 4.437e-06   2.79e-06      1.592      0.112   -1.04e-06    9.92e-06
 ==============================================================================
-Omnibus:                      163.210   Durbin-Watson:                   1.897
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              440.013
-Skew:                           1.850   Prob(JB):                     2.83e-96
-Kurtosis:                       6.219   Cond. No.                     3.03e+05
+Omnibus:                      164.407   Durbin-Watson:                   1.900
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              452.690
+Skew:                           1.851   Prob(JB):                     5.01e-99
+Kurtosis:                       6.324   Cond. No.                     1.57e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 3.03e+05. This might indicate that there are
+[3] The condition number is large, 1.57e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 vif:
-                Variable      VIF
-       unemployment_rate 4.119483
-        prop_no_vehicles 6.585202
-households_with_children 6.057120
-       prop_college_grad 3.630557
-     prop_prim_sec_roads 1.637664
-    intersection_density 6.818033
-             avg_traffic 1.817798
-       num_intersections 6.100943
-                num_jobs 1.554789
+               Variable      VIF
+median_household_income 4.010145
+      unemployment_rate 3.882402
+       prop_no_vehicles 3.661720
+   intersection_density 6.832112
+            avg_traffic 1.663444
+      num_intersections 5.817744
+               num_jobs 1.547227
 -----
 
 modal integration, metro_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.547
-Model:                            OLS   Adj. R-squared (uncentered):              0.486
-Method:                 Least Squares   F-statistic:                              8.922
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                    6.44e-08
-Time:                        19:48:17   Log-Likelihood:                          38.871
-No. Observations:                  67   AIC:                                     -61.74
-Df Residuals:                      59   BIC:                                     -44.10
-Df Model:                           8                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.535
+Model:                            OLS   Adj. R-squared (uncentered):              0.480
+Method:                 Least Squares   F-statistic:                              9.844
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                    4.16e-08
+Time:                        21:58:37   Log-Likelihood:                          37.929
+No. Observations:                  67   AIC:                                     -61.86
+Df Residuals:                      60   BIC:                                     -46.43
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-median_household_income   4.425e-07   5.21e-07      0.850      0.399   -5.99e-07    1.48e-06
-unemployment_rate            0.0046      0.003      1.326      0.190      -0.002       0.012
-prop_no_vehicles          6.324e-05   8.83e-05      0.716      0.477      -0.000       0.000
-households_with_children  3.861e-05   5.83e-05      0.663      0.510    -7.8e-05       0.000
-prop_prim_sec_roads          0.3986      0.293      1.362      0.178      -0.187       0.984
-avg_traffic               1.533e-06   1.59e-06      0.965      0.338   -1.64e-06    4.71e-06
-num_intersections           -0.0006      0.001     -1.078      0.285      -0.002       0.001
-num_jobs                   1.82e-07   4.49e-06      0.041      0.968   -8.81e-06    9.17e-06
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income  6.181e-07   5.12e-07      1.206      0.232   -4.07e-07    1.64e-06
+unemployment_rate           0.0043      0.004      1.184      0.241      -0.003       0.012
+prop_no_vehicles         8.621e-05   8.58e-05      1.004      0.319   -8.55e-05       0.000
+intersection_density        0.0001      0.000      0.498      0.620      -0.000       0.001
+avg_traffic              1.513e-06   1.52e-06      0.994      0.324   -1.53e-06    4.56e-06
+num_intersections          -0.0004      0.001     -0.724      0.472      -0.002       0.001
+num_jobs                -3.954e-07   4.39e-06     -0.090      0.929   -9.18e-06    8.39e-06
 ==============================================================================
-Omnibus:                       11.813   Durbin-Watson:                   1.380
-Prob(Omnibus):                  0.003   Jarque-Bera (JB):               12.159
-Skew:                           0.987   Prob(JB):                      0.00229
-Kurtosis:                       3.679   Cond. No.                     1.33e+06
+Omnibus:                       15.251   Durbin-Watson:                   1.291
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               17.079
+Skew:                           1.131   Prob(JB):                     0.000196
+Kurtosis:                       3.999   Cond. No.                     1.63e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 1.33e+06. This might indicate that there are
+[3] The condition number is large, 1.63e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 
 
 modal substitution, metro_end:
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:                      y   R-squared (uncentered):                   0.342
-Model:                            OLS   Adj. R-squared (uncentered):              0.253
-Method:                 Least Squares   F-statistic:                              3.830
-Date:                Mon, 17 Feb 2025   Prob (F-statistic):                     0.00111
-Time:                        19:48:17   Log-Likelihood:                          59.344
-No. Observations:                  67   AIC:                                     -102.7
-Df Residuals:                      59   BIC:                                     -85.05
-Df Model:                           8                                                  
+Dep. Variable:                      y   R-squared (uncentered):                   0.319
+Model:                            OLS   Adj. R-squared (uncentered):              0.240
+Method:                 Least Squares   F-statistic:                              4.017
+Date:                Mon, 24 Feb 2025   Prob (F-statistic):                     0.00115
+Time:                        21:58:37   Log-Likelihood:                          58.210
+No. Observations:                  67   AIC:                                     -102.4
+Df Residuals:                      60   BIC:                                     -86.99
+Df Model:                           7                                                  
 Covariance Type:            nonrobust                                                  
-============================================================================================
-                               coef    std err          t      P>|t|      [0.025      0.975]
---------------------------------------------------------------------------------------------
-median_household_income  -2.341e-09   3.84e-07     -0.006      0.995    -7.7e-07    7.65e-07
-unemployment_rate            0.0022      0.003      0.864      0.391      -0.003       0.007
-prop_no_vehicles             0.0001    6.5e-05      1.948      0.056   -3.42e-06       0.000
-households_with_children -1.313e-05   4.29e-05     -0.306      0.761    -9.9e-05    7.28e-05
-prop_prim_sec_roads          0.2777      0.216      1.288      0.203      -0.154       0.709
-avg_traffic              -3.876e-08   1.17e-06     -0.033      0.974   -2.38e-06     2.3e-06
-num_intersections           -0.0003      0.000     -0.634      0.528      -0.001       0.001
-num_jobs                  2.299e-06   3.31e-06      0.695      0.490   -4.32e-06    8.92e-06
+===========================================================================================
+                              coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+median_household_income  9.934e-08   3.79e-07      0.262      0.794   -6.58e-07    8.57e-07
+unemployment_rate           0.0013      0.003      0.495      0.622      -0.004       0.007
+prop_no_vehicles            0.0001   6.34e-05      1.909      0.061   -5.77e-06       0.000
+intersection_density      6.49e-05      0.000      0.354      0.725      -0.000       0.000
+avg_traffic             -4.222e-07   1.12e-06     -0.375      0.709   -2.67e-06    1.83e-06
+num_intersections          -0.0002      0.000     -0.412      0.682      -0.001       0.001
+num_jobs                 2.816e-06   3.24e-06      0.868      0.389   -3.67e-06    9.31e-06
 ==============================================================================
-Omnibus:                       16.342   Durbin-Watson:                   2.205
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               19.256
-Skew:                           1.277   Prob(JB):                     6.59e-05
-Kurtosis:                       3.611   Cond. No.                     1.33e+06
+Omnibus:                       17.915   Durbin-Watson:                   2.133
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               21.899
+Skew:                           1.360   Prob(JB):                     1.76e-05
+Kurtosis:                       3.671   Cond. No.                     1.63e+04
 ==============================================================================
 
 Notes:
 [1] R² is computed without centering (uncentered) since the model does not contain a constant.
 [2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[3] The condition number is large, 1.33e+06. This might indicate that there are
+[3] The condition number is large, 1.63e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
 vif:
-                Variable      VIF
- median_household_income 5.217344
-       unemployment_rate 3.676302
-        prop_no_vehicles 3.827056
-households_with_children 5.741170
-     prop_prim_sec_roads 2.310519
-             avg_traffic 4.922976
-       num_intersections 4.081833
-                num_jobs 2.413787
+               Variable      VIF
+median_household_income 4.997492
+      unemployment_rate 3.895644
+       prop_no_vehicles 3.575033
+   intersection_density 8.949820
+            avg_traffic 4.468867
+      num_intersections 4.388717
+               num_jobs 2.280887
 -----
