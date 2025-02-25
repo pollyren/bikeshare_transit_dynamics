@@ -39,7 +39,11 @@ def run_ols(df: pd.DataFrame, df_name, outfile, ax_mi, ax_ms):
     # X = sm.add_constant(X)
 
     # X_filtered = X[["median_age", "median_household_income", "intersection_density", "avg_traffic", "num_jobs"]]
-    X_filtered = X.drop(columns=["prop_commute_drove", "prop_commute_carpooled", "prop_commute_pubtransit", "prop_commute_walked", "mean_commute_time", "avg_vehicle_miles"])
+    X_filtered = X.drop(
+        columns=["urban_group", "prop_commute_drove", "prop_commute_carpooled",
+                 "prop_commute_pubtransit", "prop_commute_walked", "mean_commute_time",
+                 "avg_vehicle_miles", "prop_hs_grad", "prop_college_grad", "prop_prim_sec_roads",
+                 "households_with_children", "avg_household_size"])
     X_filtered = remove_collinear_variables(X_filtered)
 
     mi_model = sm.OLS(mi_y, X_filtered).fit()
