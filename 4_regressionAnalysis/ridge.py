@@ -4,6 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score
 
 def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str, ax_mi, ax_ms):
     df_numeric = df.select_dtypes(include=['number']).dropna()
@@ -13,16 +14,24 @@ def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str, ax_mi, ax
 
     X = df_numeric.iloc[:, 5:-2]
     # X = X[["median_age", "median_household_income", "intersection_density", "avg_traffic", "num_jobs"]]
-    X = X.drop(columns=["prop_commute_drove", "prop_commute_carpooled", "prop_commute_pubtransit", "prop_commute_walked", "mean_commute_time"])
+    X = X.drop(columns=["prop_commute_drove", "prop_commute_carpooled",
+                        "prop_commute_pubtransit", "prop_commute_walked",
+                        "mean_commute_time", "prop_hs_grad", "urban_group"])
 
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    ridge_mi = RidgeCV(alphas=np.logspace(-6, 6, 13), store_cv_results=True)
-    ridge_ms = RidgeCV(alphas=np.logspace(-6, 6, 13), store_cv_results=True)
+    ridge_mi = RidgeCV(alphas=np.logspace(-10, 10, 21), store_cv_results=True)
+    ridge_ms = RidgeCV(alphas=np.logspace(-10, 10, 21), store_cv_results=True)
 
     mi_model = ridge_mi.fit(X_scaled, mi_y)
     ms_model = ridge_ms.fit(X_scaled, ms_y)
+
+    mi_y_pred = mi_model.predict(X_scaled)
+    ms_y_pred = ms_model.predict(X_scaled)
+
+    mi_r2 = r2_score(mi_y, mi_y_pred)
+    ms_r2 = r2_score(ms_y, ms_y_pred)
 
     mi_coefs = pd.DataFrame({"Feature": X.columns, "Coefficient": mi_model.coef_})
     ms_coefs = pd.DataFrame({"Feature": X.columns, "Coefficient": ms_model.coef_})
@@ -36,12 +45,12 @@ def run_ridge_regression(df: pd.DataFrame, df_name: str, outfile: str, ax_mi, ax
         f.write("\n-----\n")
 
     sns.barplot(x=mi_coefs["Coefficient"], y=mi_coefs["Feature"], ax=ax_mi)
-    ax_mi.set_title(f"{df_name} (MI)")
+    ax_mi.set_title(f"{df_name} (MI), R^2={mi_r2}")
     ax_mi.set_xlabel("coefficient")
     ax_mi.set_ylabel("feature")
 
     sns.barplot(x=ms_coefs["Coefficient"], y=ms_coefs["Feature"], ax=ax_ms)
-    ax_ms.set_title(f"{df_name} (MS)")
+    ax_ms.set_title(f"{df_name} (MS), R^2={ms_r2}")
     ax_ms.set_xlabel("coefficient")
     ax_ms.set_ylabel("feature")
 
