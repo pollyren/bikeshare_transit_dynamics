@@ -1,147 +1,135 @@
 
 modal integration, divvy_start (alpha=100.0):
                    Feature  Coefficient
-                median_age     0.010652
-             housing_units     0.012839
-   median_household_income    -0.001646
-         unemployment_rate     0.005212
-          prop_no_vehicles     0.010998
-        avg_household_size     0.004636
-  households_with_children     0.006634
-              prop_hs_grad     0.009594
-         prop_college_grad     0.016106
-           prop_same_house     0.000285
-prop_internet_subscription    -0.003446
-               urban_group    -0.000757
-         avg_vehicle_miles    -0.011264
-               num_streets    -0.003661
-       prop_prim_sec_roads     0.003325
-      intersection_density    -0.002705
-    street_network_density    -0.001422
-      connected_node_ratio    -0.006402
-               avg_traffic     0.007178
-         num_intersections     0.001598
-                  num_jobs     0.008447
+                median_age     0.011175
+             housing_units     0.012961
+   median_household_income    -0.000081
+         unemployment_rate     0.006099
+          prop_no_vehicles     0.010531
+        avg_household_size     0.001577
+  households_with_children     0.006500
+         prop_college_grad     0.019508
+           prop_same_house    -0.000146
+prop_internet_subscription    -0.002124
+         avg_vehicle_miles    -0.011545
+               num_streets    -0.003062
+       prop_prim_sec_roads     0.002683
+      intersection_density    -0.003497
+    street_network_density    -0.001060
+      connected_node_ratio    -0.006248
+               avg_traffic     0.007223
+         num_intersections     0.001993
+                  num_jobs     0.008116
 
 modal substitution, divvy_start (alpha=100.0):
                    Feature  Coefficient
-                median_age    -0.005174
-             housing_units     0.008317
-   median_household_income     0.010244
-         unemployment_rate    -0.002584
-          prop_no_vehicles     0.013962
-        avg_household_size    -0.007665
-  households_with_children    -0.001276
-              prop_hs_grad     0.010510
-         prop_college_grad    -0.000357
-           prop_same_house    -0.005688
-prop_internet_subscription    -0.014744
-               urban_group    -0.003302
-         avg_vehicle_miles    -0.016106
-               num_streets    -0.003865
-       prop_prim_sec_roads    -0.008999
-      intersection_density    -0.004805
-    street_network_density     0.002688
-      connected_node_ratio    -0.019367
-               avg_traffic     0.002804
-         num_intersections    -0.004929
-                  num_jobs     0.004594
+                median_age    -0.004491
+             housing_units     0.008476
+   median_household_income     0.012156
+         unemployment_rate    -0.001724
+          prop_no_vehicles     0.013171
+        avg_household_size    -0.010939
+  households_with_children    -0.001216
+         prop_college_grad     0.003529
+           prop_same_house    -0.006142
+prop_internet_subscription    -0.013319
+         avg_vehicle_miles    -0.017089
+               num_streets    -0.003332
+       prop_prim_sec_roads    -0.009730
+      intersection_density    -0.005498
+    street_network_density     0.003709
+      connected_node_ratio    -0.019181
+               avg_traffic     0.002762
+         num_intersections    -0.004653
+                  num_jobs     0.004268
 -----
 
 modal integration, citi_start (alpha=1000.0):
                    Feature  Coefficient
-                median_age    -0.005035
-             housing_units    -0.000615
-   median_household_income    -0.004794
-         unemployment_rate     0.007488
-          prop_no_vehicles     0.003247
-        avg_household_size    -0.001185
-  households_with_children     0.003143
-              prop_hs_grad    -0.002282
-         prop_college_grad    -0.005000
-           prop_same_house     0.001236
-prop_internet_subscription    -0.005451
-               urban_group     0.000000
-         avg_vehicle_miles    -0.004827
-               num_streets     0.004672
-       prop_prim_sec_roads    -0.002200
-      intersection_density    -0.002019
-    street_network_density    -0.003263
-      connected_node_ratio     0.001757
-               avg_traffic     0.002273
-         num_intersections     0.003821
-                  num_jobs     0.003306
+                median_age    -0.005114
+             housing_units    -0.000664
+   median_household_income    -0.005091
+         unemployment_rate     0.007631
+          prop_no_vehicles     0.003302
+        avg_household_size    -0.000981
+  households_with_children     0.003268
+         prop_college_grad    -0.005413
+           prop_same_house     0.001347
+prop_internet_subscription    -0.005613
+         avg_vehicle_miles    -0.004945
+               num_streets     0.004682
+       prop_prim_sec_roads    -0.002182
+      intersection_density    -0.001914
+    street_network_density    -0.003169
+      connected_node_ratio     0.001762
+               avg_traffic     0.002270
+         num_intersections     0.003816
+                  num_jobs     0.003313
 
 modal substitution, citi_start (alpha=1000.0):
                    Feature  Coefficient
-                median_age    -0.001179
-             housing_units     0.000231
-   median_household_income    -0.003734
-         unemployment_rate     0.004247
-          prop_no_vehicles     0.001906
-        avg_household_size     0.000747
-  households_with_children     0.003301
-              prop_hs_grad    -0.002160
-         prop_college_grad    -0.003575
-           prop_same_house    -0.000012
-prop_internet_subscription    -0.004198
-               urban_group     0.000000
-         avg_vehicle_miles    -0.000414
-               num_streets     0.003678
-       prop_prim_sec_roads     0.001259
-      intersection_density    -0.001990
-    street_network_density    -0.003073
-      connected_node_ratio    -0.001110
-               avg_traffic    -0.001479
-         num_intersections     0.002772
-                  num_jobs     0.002398
+                median_age    -0.001254
+             housing_units     0.000185
+   median_household_income    -0.004015
+         unemployment_rate     0.004381
+          prop_no_vehicles     0.001959
+        avg_household_size     0.000940
+  households_with_children     0.003419
+         prop_college_grad    -0.003966
+           prop_same_house     0.000093
+prop_internet_subscription    -0.004352
+         avg_vehicle_miles    -0.000526
+               num_streets     0.003687
+       prop_prim_sec_roads     0.001276
+      intersection_density    -0.001891
+    street_network_density    -0.002984
+      connected_node_ratio    -0.001105
+               avg_traffic    -0.001482
+         num_intersections     0.002767
+                  num_jobs     0.002404
 -----
 
-modal integration, metro_start (alpha=1000000.0):
+modal integration, metro_start (alpha=10000000000.0):
                    Feature   Coefficient
-                median_age -7.358915e-07
-             housing_units  1.256103e-06
-   median_household_income  9.229936e-09
-         unemployment_rate -9.160525e-07
-          prop_no_vehicles -4.978796e-07
-        avg_household_size -2.077467e-06
-  households_with_children -4.364856e-08
-              prop_hs_grad  5.195495e-07
-         prop_college_grad -5.646560e-07
-           prop_same_house -4.268782e-07
-prop_internet_subscription  2.256065e-06
-               urban_group  3.601999e-07
-         avg_vehicle_miles  6.534913e-07
-               num_streets -8.266365e-07
-       prop_prim_sec_roads  5.817047e-07
-      intersection_density -1.216921e-06
-    street_network_density -1.548059e-06
-      connected_node_ratio -7.833676e-07
-               avg_traffic  2.411160e-07
-         num_intersections -1.106244e-06
-                  num_jobs -1.103983e-06
+                median_age -7.358071e-11
+             housing_units  1.256223e-10
+   median_household_income  9.444936e-13
+         unemployment_rate -9.161580e-11
+          prop_no_vehicles -4.980216e-11
+        avg_household_size -2.077695e-10
+  households_with_children -4.375511e-12
+         prop_college_grad -5.644490e-11
+           prop_same_house -4.268992e-11
+prop_internet_subscription  2.256423e-10
+         avg_vehicle_miles  6.536777e-11
+               num_streets -8.268249e-11
+       prop_prim_sec_roads  5.816710e-11
+      intersection_density -1.217210e-10
+    street_network_density -1.548323e-10
+      connected_node_ratio -7.835178e-11
+               avg_traffic  2.412196e-11
+         num_intersections -1.106437e-10
+                  num_jobs -1.104090e-10
 
-modal substitution, metro_start (alpha=1000000.0):
+modal substitution, metro_start (alpha=10000000000.0):
                    Feature   Coefficient
-                median_age -3.666035e-07
-             housing_units  9.868435e-07
-   median_household_income -8.222103e-07
-         unemployment_rate  4.868210e-07
-          prop_no_vehicles  1.677515e-06
-        avg_household_size -1.213001e-06
-  households_with_children -5.210424e-07
-              prop_hs_grad  2.810292e-08
-         prop_college_grad  1.449711e-08
-           prop_same_house -1.632546e-07
-prop_internet_subscription -2.789011e-07
-               urban_group  7.630065e-07
-         avg_vehicle_miles -6.020683e-07
-               num_streets  1.532913e-07
-       prop_prim_sec_roads  5.257017e-07
-      intersection_density  5.195997e-07
-    street_network_density -7.748505e-08
-      connected_node_ratio  7.241357e-07
-               avg_traffic  8.475629e-08
-         num_intersections  1.299804e-07
-                  num_jobs  1.555755e-06
+                median_age -3.666315e-11
+             housing_units  9.869850e-11
+   median_household_income -8.223108e-11
+         unemployment_rate  4.868503e-11
+          prop_no_vehicles  1.677742e-10
+        avg_household_size -1.213141e-10
+  households_with_children -5.211194e-11
+         prop_college_grad  1.452982e-12
+           prop_same_house -1.633579e-11
+prop_internet_subscription -2.790195e-11
+         avg_vehicle_miles -6.022225e-11
+               num_streets  1.534622e-11
+       prop_prim_sec_roads  5.258256e-11
+      intersection_density  5.197269e-11
+    street_network_density -7.743382e-12
+      connected_node_ratio  7.242732e-11
+               avg_traffic  8.472546e-12
+         num_intersections  1.301606e-11
+                  num_jobs  1.555974e-10
 -----
