@@ -265,3 +265,32 @@ UPDATE metro_trips_aggregates_end AS t
 SET num_jobs = d.c000::INTEGER
 FROM ca_wac_2022 AS d
 WHERE t.tract = d.census_tract;
+
+
+-- delete all census tracts that have fewer than 10 trips (likely noise)
+DO $$
+DECLARE
+    target_table TEXT;
+BEGIN
+    FOREACH target_table IN ARRAY ARRAY[
+        'divvy_trips_aggregates_start',
+        'divvy_trips_aggregates_end',
+        'citi_trips_aggregates_start',
+        'citi_trips_aggregates_end',
+        'metro_trips_aggregates_start',
+        'metro_trips_aggregates_end'
+    ]
+    LOOP
+        EXECUTE format(
+            'DELETE FROM %I
+             WHERE (
+                COALESCE(mi_flm_count, 0) +
+                COALESCE(mi_fm_count, 0) +
+                COALESCE(mi_lm_count, 0) +
+                COALESCE(ms_count, 0) +
+                COALESCE(none_count, 0)
+             ) < 10;',
+            target_table
+        );
+    END LOOP;
+END $$;
