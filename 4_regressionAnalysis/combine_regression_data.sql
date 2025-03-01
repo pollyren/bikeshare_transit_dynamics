@@ -267,7 +267,8 @@ FROM ca_wac_2022 AS d
 WHERE t.tract = d.census_tract;
 
 
--- delete all census tracts that have fewer than 10 trips (likely noise)
+-- delete all census tracts that have fewer than 100 trips (likely noise)
+-- for chicago and nyc
 DO $$
 DECLARE
     target_table TEXT;
@@ -276,7 +277,29 @@ BEGIN
         'divvy_trips_aggregates_start',
         'divvy_trips_aggregates_end',
         'citi_trips_aggregates_start',
-        'citi_trips_aggregates_end',
+        'citi_trips_aggregates_end'
+    ]
+    LOOP
+        EXECUTE format(
+            'DELETE FROM %I
+             WHERE (
+                COALESCE(mi_flm_count, 0) +
+                COALESCE(mi_fm_count, 0) +
+                COALESCE(mi_lm_count, 0) +
+                COALESCE(ms_count, 0) +
+                COALESCE(none_count, 0)
+             ) <= 100;',
+            target_table
+        );
+    END LOOP;
+END $$;
+
+-- use 25 as a threshold for la
+DO $$
+DECLARE
+    target_table TEXT;
+BEGIN
+    FOREACH target_table IN ARRAY ARRAY[
         'metro_trips_aggregates_start',
         'metro_trips_aggregates_end'
     ]
@@ -289,7 +312,7 @@ BEGIN
                 COALESCE(mi_lm_count, 0) +
                 COALESCE(ms_count, 0) +
                 COALESCE(none_count, 0)
-             ) < 10;',
+             ) <= 25;',
             target_table
         );
     END LOOP;
