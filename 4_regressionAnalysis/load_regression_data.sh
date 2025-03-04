@@ -102,6 +102,13 @@ psql -d $DB_NAME -c "\COPY nanda_roads FROM stdin WITH CSV HEADER NULL '';"
 # join regression data
 psql -d $DB_NAME -f combine_regression_data.sql
 
+count the number of bikeshare docks and transit stops per tract
+have to reload stop data because it was dropped earlier, and remove again when done
+cd ../1_setup
+python3 setup_gtfs_data.py --stop-only
+cd ../4_regressionAnalysis
+psql -d $DB_NAME -f count_stations.sql
+psql -d $DB_NAME -f ../3_modalAnalysis/drop_intermediate_tables.sql
 
 # write aggregated files to data/final
 mkdir -p ../data/final
