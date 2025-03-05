@@ -3,6 +3,7 @@ import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 VIF_THRESHOLD = 10
 
@@ -30,34 +31,34 @@ def remove_collinear_variables(df: pd.DataFrame):
 
 
 def run_ols(df: pd.DataFrame, df_name, outfile, ax_mi, ax_ms):
-    df_numeric = df.select_dtypes(include=['number']).dropna()
+    X = df.select_dtypes(include=['number']).dropna()
+    print(X.columns)
+    mi_y = X["mi_count"] * 100 / X["num_trips"]
+    ms_y = X["ms_count"] * 100 / X["num_trips"]
 
-    mi_y = df_numeric["mi_count"] / df_numeric["num_trips"]
-    ms_y = df_numeric["ms_count"] / df_numeric["num_trips"]
+    scaler_y = StandardScaler()
+    mi_y_std = scaler_y.fit_transform(mi_y.values.reshape(-1, 1)).flatten()
+    ms_y_std = scaler_y.fit_transform(ms_y.values.reshape(-1, 1)).flatten()
 
-    X = df_numeric.iloc[:, 5:-2]  # independent variable starts at median_age col
-    # X = sm.add_constant(X)
+    X_filtered = X[["median_household_income", "avg_traffic", "households_with_children", "prop_commute_walked",
+                    "intersection_density", "num_streets", "housing_units", "num_jobs", "dock_count", "stop_count"]]
 
-    # X_filtered = X[["median_age", "median_household_income", "intersection_density", "avg_traffic", "num_jobs"]]
-    X_filtered = X.drop(
-        columns=["urban_group", "prop_commute_drove", "prop_commute_carpooled",
-                 "prop_commute_pubtransit", "prop_commute_walked", "mean_commute_time",
-                 "avg_vehicle_miles", "prop_hs_grad", "prop_college_grad", "prop_prim_sec_roads",
-                 "households_with_children", "avg_household_size"])
-    X_filtered = remove_collinear_variables(X_filtered)
+    scaler = StandardScaler()
+    X_std = pd.DataFrame(scaler.fit_transform(X_filtered), columns=X_filtered.columns, index=X_filtered.index)
+    X_std = sm.add_constant(X_std)
 
-    mi_model = sm.OLS(mi_y, X_filtered).fit()
-    ms_model = sm.OLS(ms_y, X_filtered).fit()
+    mi_model = sm.OLS(mi_y_std, X_std).fit()
+    ms_model = sm.OLS(ms_y_std, X_std).fit()
 
     mi_coefs = pd.DataFrame({
-        "Feature": X_filtered.columns,
+        "Feature": X_std.columns,
         "Coefficient": mi_model.params,
         "Lower": mi_model.conf_int()[0],
         "Upper": mi_model.conf_int()[1]
     })
 
     ms_coefs = pd.DataFrame({
-        "Feature": X_filtered.columns,
+        "Feature": X_std.columns,
         "Coefficient": ms_model.params,
         "Lower": ms_model.conf_int()[0],
         "Upper": ms_model.conf_int()[1]
@@ -100,11 +101,6 @@ def main():
         dfs[df_name] = pd.read_csv(f"../data/final/{df_name}.csv", header=0, index_col=0)
         dfs[df_name]["mi_count"] = dfs[df_name][["mi_flm_count", "mi_fm_count", "mi_lm_count"]].sum(axis=1)
         dfs[df_name]["num_trips"] = dfs[df_name][["mi_count", "ms_count", "none_count"]].sum(axis=1)
-
-        # corr_matrix = dfs[df_name].iloc[:, 5:-2].corr()
-        # plt.figure(figsize=(8, 6))
-        # sns.heatmap(corr_matrix, cmap="coolwarm", linewidths=0.5)
-        # plt.savefig(f"output/{df_name}_correlation.png", bbox_inches="tight")
 
     with open("output/ols_results_start.txt", "w"):
         pass
