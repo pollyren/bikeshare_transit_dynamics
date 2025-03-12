@@ -1,0 +1,367 @@
+
+modal integration, divvy_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:         247
+Mean dependent var  :     -0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0020                Degrees of Freedom    :         235
+Pseudo R-squared    :      0.2396
+Spatial Pseudo R-squared:  0.2376
+Log likelihood      :   -316.8748
+Sigma-square ML     :      0.7605                Akaike info criterion :     657.750
+S.E of regression   :      0.8720                Schwarz criterion     :     699.862
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00368         0.05550        -0.06633         0.94711
+median_household_income        -0.06685         0.06426        -1.04029         0.29821
+         avg_traffic         0.13913         0.05884         2.36453         0.01805
+households_with_children        -0.08582         0.06950        -1.23489         0.21687
+ prop_commute_walked         0.19615         0.06469         3.03201         0.00243
+intersection_density        -0.09712         0.06746        -1.43971         0.14995
+         num_streets        -0.01056         0.08709        -0.12124         0.90350
+       housing_units         0.34175         0.06778         5.04163         0.00000
+            num_jobs         0.02550         0.08187         0.31148         0.75544
+          dock_count         0.02122         0.08972         0.23652         0.81303
+          stop_count         0.02787         0.09403         0.29635         0.76696
+           W_mi_prop         0.09349         0.08939         1.04588         0.29562
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.0669         -0.0069         -0.0737
+         avg_traffic         0.1391          0.0143          0.1535
+households_with_children        -0.0858         -0.0089         -0.0947
+ prop_commute_walked         0.1962          0.0202          0.2164
+intersection_density        -0.0971         -0.0100         -0.1071
+         num_streets        -0.0106         -0.0011         -0.0116
+       housing_units         0.3417          0.0352          0.3770
+            num_jobs         0.0255          0.0026          0.0281
+          dock_count         0.0212          0.0022          0.0234
+          stop_count         0.0279          0.0029          0.0307
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.0670         -0.0068         -0.0737
+         avg_traffic         0.1394          0.0141          0.1535
+households_with_children        -0.0860         -0.0087         -0.0947
+ prop_commute_walked         0.1965          0.0199          0.2164
+intersection_density        -0.0973         -0.0098         -0.1071
+         num_streets        -0.0106         -0.0011         -0.0116
+       housing_units         0.3424          0.0346          0.3770
+            num_jobs         0.0255          0.0026          0.0281
+          dock_count         0.0213          0.0022          0.0234
+          stop_count         0.0279          0.0028          0.0307
+================================ END OF REPORT =====================================
+
+
+modal substitution, divvy_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:         247
+Mean dependent var  :      0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0020                Degrees of Freedom    :         235
+Pseudo R-squared    :      0.2333
+Spatial Pseudo R-squared:  0.2289
+Log likelihood      :   -317.9894
+Sigma-square ML     :      0.7667                Akaike info criterion :     659.979
+S.E of regression   :      0.8756                Schwarz criterion     :     702.091
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00284         0.05572        -0.05101         0.95932
+median_household_income         0.01077         0.06453         0.16689         0.86746
+         avg_traffic         0.15804         0.05908         2.67504         0.00747
+households_with_children        -0.11077         0.06979        -1.58716         0.11248
+ prop_commute_walked         0.06818         0.06496         1.04952         0.29394
+intersection_density        -0.15511         0.06775        -2.28961         0.02204
+         num_streets        -0.23919         0.08746        -2.73494         0.00624
+       housing_units         0.31492         0.06808         4.62563         0.00000
+            num_jobs         0.03673         0.08221         0.44684         0.65499
+          dock_count         0.00114         0.09008         0.01271         0.98986
+          stop_count         0.07926         0.09440         0.83954         0.40117
+           W_ms_prop         0.11390         0.08757         1.30070         0.19336
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income         0.0108          0.0014          0.0122
+         avg_traffic         0.1580          0.0203          0.1784
+households_with_children        -0.1108         -0.0142         -0.1250
+ prop_commute_walked         0.0682          0.0088          0.0769
+intersection_density        -0.1551         -0.0199         -0.1750
+         num_streets        -0.2392         -0.0307         -0.2699
+       housing_units         0.3149          0.0405          0.3554
+            num_jobs         0.0367          0.0047          0.0415
+          dock_count         0.0011          0.0001          0.0013
+          stop_count         0.0793          0.0102          0.0894
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income         0.0108          0.0014          0.0122
+         avg_traffic         0.1585          0.0199          0.1784
+households_with_children        -0.1111         -0.0139         -0.1250
+ prop_commute_walked         0.0684          0.0086          0.0769
+intersection_density        -0.1555         -0.0195         -0.1750
+         num_streets        -0.2398         -0.0301         -0.2699
+       housing_units         0.3158          0.0396          0.3554
+            num_jobs         0.0368          0.0046          0.0415
+          dock_count         0.0011          0.0001          0.0013
+          stop_count         0.0795          0.0100          0.0894
+================================ END OF REPORT =====================================
+modal integration, citi_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:         356
+Mean dependent var  :      0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0014                Degrees of Freedom    :         344
+Pseudo R-squared    :      0.1700
+Spatial Pseudo R-squared:  0.1699
+Log likelihood      :   -472.0012
+Sigma-square ML     :      0.8300                Akaike info criterion :     968.002
+S.E of regression   :      0.9111                Schwarz criterion     :    1014.502
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00004         0.04829        -0.00089         0.99929
+median_household_income        -0.19551         0.05676        -3.44429         0.00057
+         avg_traffic        -0.04146         0.05007        -0.82815         0.40759
+households_with_children        -0.00134         0.06983        -0.01923         0.98466
+ prop_commute_walked         0.11047         0.05591         1.97591         0.04816
+intersection_density         0.06337         0.05954         1.06426         0.28721
+         num_streets        -0.06153         0.06496        -0.94724         0.34352
+       housing_units         0.07017         0.06194         1.13285         0.25728
+            num_jobs         0.10870         0.05287         2.05591         0.03979
+          dock_count        -0.04133         0.05602        -0.73775         0.46066
+          stop_count         0.30808         0.05193         5.93249         0.00000
+           W_mi_prop         0.04186         0.13622         0.30728         0.75863
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1955         -0.0085         -0.2041
+         avg_traffic        -0.0415         -0.0018         -0.0433
+households_with_children        -0.0013         -0.0001         -0.0014
+ prop_commute_walked         0.1105          0.0048          0.1153
+intersection_density         0.0634          0.0028          0.0661
+         num_streets        -0.0615         -0.0027         -0.0642
+       housing_units         0.0702          0.0031          0.0732
+            num_jobs         0.1087          0.0047          0.1134
+          dock_count        -0.0413         -0.0018         -0.0431
+          stop_count         0.3081          0.0135          0.3215
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1955         -0.0085         -0.2041
+         avg_traffic        -0.0415         -0.0018         -0.0433
+households_with_children        -0.0013         -0.0001         -0.0014
+ prop_commute_walked         0.1105          0.0048          0.1153
+intersection_density         0.0634          0.0028          0.0661
+         num_streets        -0.0615         -0.0027         -0.0642
+       housing_units         0.0702          0.0031          0.0732
+            num_jobs         0.1087          0.0047          0.1134
+          dock_count        -0.0413         -0.0018         -0.0431
+          stop_count         0.3081          0.0134          0.3215
+================================ END OF REPORT =====================================
+
+
+modal substitution, citi_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:         356
+Mean dependent var  :      0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0014                Degrees of Freedom    :         344
+Pseudo R-squared    :      0.1183
+Spatial Pseudo R-squared:  0.1180
+Log likelihood      :   -482.7315
+Sigma-square ML     :      0.8817                Akaike info criterion :     989.463
+S.E of regression   :      0.9390                Schwarz criterion     :    1035.962
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00005         0.04977        -0.00109         0.99913
+median_household_income        -0.19637         0.05851        -3.35651         0.00079
+         avg_traffic        -0.06758         0.05160        -1.30964         0.19032
+households_with_children        -0.00074         0.07197        -0.01031         0.99177
+ prop_commute_walked         0.01413         0.05763         0.24520         0.80630
+intersection_density         0.00494         0.06137         0.08043         0.93589
+         num_streets         0.05178         0.06695         0.77344         0.43926
+       housing_units        -0.03762         0.06383        -0.58931         0.55565
+            num_jobs         0.05002         0.05449         0.91784         0.35870
+          dock_count        -0.10590         0.05772        -1.83471         0.06655
+          stop_count         0.28083         0.05352         5.24694         0.00000
+           W_ms_prop        -0.02724         0.14506        -0.18778         0.85105
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1964          0.0052         -0.1912
+         avg_traffic        -0.0676          0.0018         -0.0658
+households_with_children        -0.0007          0.0000         -0.0007
+ prop_commute_walked         0.0141         -0.0004          0.0138
+intersection_density         0.0049         -0.0001          0.0048
+         num_streets         0.0518         -0.0014          0.0504
+       housing_units        -0.0376          0.0010         -0.0366
+            num_jobs         0.0500         -0.0013          0.0487
+          dock_count        -0.1059          0.0028         -0.1031
+          stop_count         0.2808         -0.0074          0.2734
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1964          0.0052         -0.1912
+         avg_traffic        -0.0676          0.0018         -0.0658
+households_with_children        -0.0007          0.0000         -0.0007
+ prop_commute_walked         0.0141         -0.0004          0.0138
+intersection_density         0.0049         -0.0001          0.0048
+         num_streets         0.0518         -0.0014          0.0504
+       housing_units        -0.0376          0.0010         -0.0366
+            num_jobs         0.0500         -0.0013          0.0487
+          dock_count        -0.1059          0.0028         -0.1031
+          stop_count         0.2808         -0.0075          0.2734
+================================ END OF REPORT =====================================
+modal integration, metro_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:          65
+Mean dependent var  :      0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0078                Degrees of Freedom    :          53
+Pseudo R-squared    :      0.1828
+Spatial Pseudo R-squared:  0.1830
+Log likelihood      :    -85.6737
+Sigma-square ML     :      0.8172                Akaike info criterion :     195.347
+S.E of regression   :      0.9040                Schwarz criterion     :     221.440
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.00076         0.11214         0.00679         0.99458
+median_household_income        -0.10005         0.15173        -0.65939         0.50965
+         avg_traffic         0.02557         0.12000         0.21310         0.83125
+households_with_children        -0.19429         0.14602        -1.33054         0.18334
+ prop_commute_walked        -0.11457         0.15355        -0.74609         0.45561
+intersection_density        -0.17200         0.14286        -1.20397         0.22860
+         num_streets        -0.18121         0.20278        -0.89364         0.37152
+       housing_units         0.24669         0.12354         1.99687         0.04584
+            num_jobs        -0.15497         0.16617        -0.93261         0.35102
+          dock_count         0.26333         0.13936         1.88955         0.05882
+          stop_count         0.17396         0.19376         0.89780         0.36929
+           W_mi_prop         0.01662         0.16298         0.10199         0.91876
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1000         -0.0017         -0.1017
+         avg_traffic         0.0256          0.0004          0.0260
+households_with_children        -0.1943         -0.0033         -0.1976
+ prop_commute_walked        -0.1146         -0.0019         -0.1165
+intersection_density        -0.1720         -0.0029         -0.1749
+         num_streets        -0.1812         -0.0031         -0.1843
+       housing_units         0.2467          0.0042          0.2509
+            num_jobs        -0.1550         -0.0026         -0.1576
+          dock_count         0.2633          0.0045          0.2678
+          stop_count         0.1740          0.0029          0.1769
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.1001         -0.0017         -0.1017
+         avg_traffic         0.0256          0.0004          0.0260
+households_with_children        -0.1943         -0.0033         -0.1976
+ prop_commute_walked        -0.1146         -0.0019         -0.1165
+intersection_density        -0.1720         -0.0029         -0.1749
+         num_streets        -0.1812         -0.0031         -0.1843
+       housing_units         0.2467          0.0042          0.2509
+            num_jobs        -0.1550         -0.0026         -0.1576
+          dock_count         0.2634          0.0044          0.2678
+          stop_count         0.1740          0.0029          0.1769
+================================ END OF REPORT =====================================
+
+
+modal substitution, metro_end:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: MAXIMUM LIKELIHOOD SPATIAL LAG (METHOD = FULL)
+-----------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:          65
+Mean dependent var  :     -0.0000                Number of Variables   :          12
+S.D. dependent var  :      1.0078                Degrees of Freedom    :          53
+Pseudo R-squared    :      0.2033
+Spatial Pseudo R-squared:  0.2028
+Log likelihood      :    -84.8469
+Sigma-square ML     :      0.7967                Akaike info criterion :     193.694
+S.E of regression   :      0.8926                Schwarz criterion     :     219.786
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00020         0.11072        -0.00181         0.99856
+median_household_income        -0.05795         0.14983        -0.38677         0.69893
+         avg_traffic        -0.01134         0.11846        -0.09572         0.92374
+households_with_children        -0.09477         0.14432        -0.65668         0.51139
+ prop_commute_walked        -0.17402         0.15149        -1.14872         0.25067
+intersection_density         0.11383         0.14102         0.80718         0.41956
+         num_streets        -0.37325         0.20023        -1.86414         0.06230
+       housing_units         0.22665         0.12204         1.85720         0.06328
+            num_jobs         0.17807         0.16387         1.08665         0.27719
+          dock_count         0.29765         0.13760         2.16304         0.03054
+          stop_count         0.23542         0.19185         1.22705         0.21980
+           W_ms_prop         0.01222         0.16022         0.07630         0.93918
+------------------------------------------------------------------------------------
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the 'simple' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.0579         -0.0007         -0.0587
+         avg_traffic        -0.0113         -0.0001         -0.0115
+households_with_children        -0.0948         -0.0012         -0.0959
+ prop_commute_walked        -0.1740         -0.0022         -0.1762
+intersection_density         0.1138          0.0014          0.1152
+         num_streets        -0.3732         -0.0046         -0.3779
+       housing_units         0.2266          0.0028          0.2295
+            num_jobs         0.1781          0.0022          0.1803
+          dock_count         0.2976          0.0037          0.3013
+          stop_count         0.2354          0.0029          0.2383
+Impacts computed using the 'full' method.
+            Variable         Direct        Indirect          Total
+median_household_income        -0.0580         -0.0007         -0.0587
+         avg_traffic        -0.0113         -0.0001         -0.0115
+households_with_children        -0.0948         -0.0012         -0.0959
+ prop_commute_walked        -0.1740         -0.0021         -0.1762
+intersection_density         0.1138          0.0014          0.1152
+         num_streets        -0.3733         -0.0046         -0.3779
+       housing_units         0.2267          0.0028          0.2295
+            num_jobs         0.1781          0.0022          0.1803
+          dock_count         0.2977          0.0037          0.3013
+          stop_count         0.2354          0.0029          0.2383
+================================ END OF REPORT =====================================
