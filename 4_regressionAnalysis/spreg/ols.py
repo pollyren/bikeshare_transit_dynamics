@@ -92,18 +92,17 @@ def run_spatial_ols(df: pd.DataFrame, df_name, weights, outfile, ax_mi, ax_ms):
         "Upper": ms_model.vm.diagonal() ** 0.5 * 1.96 + ms_model.betas.flatten()
     })
 
-    if not weights: # skip VIF data for OLS with weights bc redundant
-        with open(outfile, "a") as f:
-            f.write(f"\nmodal integration, {df_name}:\n")
-            f.write(str(mi_model.summary))
+    with open(outfile, "a") as f:
+        f.write(f"\nmodal integration, {df_name}:\n")
+        f.write(str(mi_model.summary))
 
-            f.write(f"\n\n\nmodal substitution, {df_name}:\n")
-            f.write(str(ms_model.summary))
+        f.write(f"\n\n\nmodal substitution, {df_name}:\n")
+        f.write(str(ms_model.summary))
 
-            vif_final = calculate_vif(X_filtered)
-            f.write("\nvif:\n")
-            f.write(vif_final.to_string(index=False))
-            f.write("\n-----\n")
+        vif_final = calculate_vif(X_filtered)
+        f.write("\nvif:\n")
+        f.write(vif_final.to_string(index=False))
+        f.write("\n-----\n")
 
     ax_mi.errorbar(mi_coefs["Coefficient"], mi_coefs["Feature"],
                    xerr=[mi_coefs["Coefficient"] - mi_coefs["Lower"], mi_coefs["Upper"] - mi_coefs["Coefficient"]],
