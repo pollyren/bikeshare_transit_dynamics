@@ -1,0 +1,421 @@
+
+modal integration, divvy_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:         250
+Mean dependent var  :     -0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0020                Degrees of Freedom    :         229
+R-squared           :      0.2714
+Adjusted R-squared  :      0.2078
+Sum squared residual:     182.143                F-statistic           :      4.2657
+Sigma-square        :       0.795                Prob(F-statistic)     :   2.456e-08
+S.E. of regression  :       0.892                Log likelihood        :    -315.151
+Sigma-square ML     :       0.729                Akaike info criterion :     672.302
+S.E of regression ML:      0.8536                Schwarz criterion     :     746.253
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00851         0.05705        -0.14923         0.88150
+median_household_income        -0.05774         0.06757        -0.85452         0.39371
+         avg_traffic         0.17728         0.06129         2.89262         0.00419
+households_with_children        -0.08033         0.07377        -1.08880         0.27738
+ prop_commute_walked         0.11293         0.06678         1.69111         0.09218
+intersection_density        -0.15678         0.07044        -2.22579         0.02700
+         num_streets        -0.12991         0.09362        -1.38762         0.16660
+       housing_units         0.30980         0.07024         4.41065         0.00002
+            num_jobs         0.03432         0.08375         0.40978         0.68235
+          dock_count         0.04308         0.09265         0.46495         0.64241
+          stop_count         0.04565         0.10055         0.45401         0.65025
+W_median_household_income        -0.32321         0.17467        -1.85045         0.06554
+       W_avg_traffic        -0.14302         0.14906        -0.95946         0.33834
+W_households_with_children         0.02506         0.15672         0.15993         0.87308
+W_prop_commute_walked        -0.18721         0.15186        -1.23281         0.21891
+W_intersection_density         0.12411         0.14834         0.83669         0.40364
+       W_num_streets        -0.04107         0.21962        -0.18702         0.85181
+     W_housing_units         0.11665         0.17846         0.65366         0.51399
+          W_num_jobs         0.06143         0.18128         0.33886         0.73503
+        W_dock_count        -0.42593         0.20990        -2.02919         0.04360
+        W_stop_count         0.31524         0.23408         1.34672         0.17940
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           4.752
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2        262.007           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20         52.036           0.0001
+Koenker-Bassett test             20         18.383           0.5622
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)              0.0224        0.958           0.3382
+Lagrange Multiplier (lag)         1          0.198           0.6561
+Robust LM (lag)                   1          0.148           0.7007
+Lagrange Multiplier (error)       1          0.287           0.5921
+Robust LM (error)                 1          0.236           0.6267
+Lagrange Multiplier (SARMA)       2          0.435           0.8046
+================================ END OF REPORT =====================================
+
+
+modal substitution, divvy_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:         250
+Mean dependent var  :     -0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0020                Degrees of Freedom    :         229
+R-squared           :      0.3594
+Adjusted R-squared  :      0.3035
+Sum squared residual:     160.147                F-statistic           :      6.4242
+Sigma-square        :       0.699                Prob(F-statistic)     :   1.129e-13
+S.E. of regression  :       0.836                Log likelihood        :    -299.063
+Sigma-square ML     :       0.641                Akaike info criterion :     640.127
+S.E of regression ML:      0.8004                Schwarz criterion     :     714.078
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.00233         0.05349         0.04351         0.96533
+median_household_income         0.01007         0.06336         0.15895         0.87385
+         avg_traffic        -0.04285         0.05747        -0.74562         0.45666
+households_with_children        -0.26599         0.06918        -3.84510         0.00016
+ prop_commute_walked         0.12043         0.06262         1.92326         0.05569
+intersection_density        -0.04343         0.06605        -0.65753         0.51150
+         num_streets        -0.18033         0.08778        -2.05422         0.04109
+       housing_units         0.39954         0.06586         6.06635         0.00000
+            num_jobs        -0.06380         0.07853        -0.81240         0.41741
+          dock_count         0.05733         0.08688         0.65986         0.51001
+          stop_count         0.15284         0.09429         1.62097         0.10640
+W_median_household_income         0.10764         0.16378         0.65722         0.51170
+       W_avg_traffic        -0.10025         0.13977        -0.71728         0.47393
+W_households_with_children        -0.04119         0.14695        -0.28028         0.77952
+W_prop_commute_walked         0.20461         0.14239         1.43692         0.15210
+W_intersection_density         0.15693         0.13909         1.12820         0.26041
+       W_num_streets         0.20286         0.20593         0.98508         0.32563
+     W_housing_units        -0.22324         0.16733        -1.33408         0.18350
+          W_num_jobs         0.06139         0.16998         0.36117         0.71831
+        W_dock_count        -0.43921         0.19682        -2.23154         0.02661
+        W_stop_count         0.30064         0.21949         1.36975         0.17211
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           4.752
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2         30.790           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20        107.098           0.0000
+Koenker-Bassett test             20         69.198           0.0000
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)             -0.0302       -0.353           0.7243
+Lagrange Multiplier (lag)         1          0.411           0.5214
+Robust LM (lag)                   1          0.109           0.7412
+Lagrange Multiplier (error)       1          0.522           0.4701
+Robust LM (error)                 1          0.220           0.6393
+Lagrange Multiplier (SARMA)       2          0.631           0.7295
+================================ END OF REPORT =====================================
+modal integration, citi_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:         376
+Mean dependent var  :      0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0013                Degrees of Freedom    :         355
+R-squared           :      0.1875
+Adjusted R-squared  :      0.1417
+Sum squared residual:     305.504                F-statistic           :      4.0959
+Sigma-square        :       0.861                Prob(F-statistic)     :   2.218e-08
+S.E. of regression  :       0.928                Log likelihood        :    -494.487
+Sigma-square ML     :       0.813                Akaike info criterion :    1030.974
+S.E of regression ML:      0.9014                Schwarz criterion     :    1113.495
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.01993         0.04883        -0.40807         0.68347
+median_household_income        -0.17812         0.05705        -3.12231         0.00194
+         avg_traffic        -0.04741         0.05050        -0.93883         0.34846
+households_with_children         0.00986         0.07008         0.14065         0.88823
+ prop_commute_walked         0.07642         0.05752         1.32864         0.18482
+intersection_density         0.05937         0.05962         0.99579         0.32003
+         num_streets        -0.04263         0.06507        -0.65509         0.51283
+       housing_units         0.01695         0.06313         0.26847         0.78849
+            num_jobs         0.09172         0.05337         1.71850         0.08658
+          dock_count        -0.04449         0.05597        -0.79479         0.42727
+          stop_count         0.33828         0.05197         6.50862         0.00000
+W_median_household_income         0.16679         0.22336         0.74672         0.45572
+       W_avg_traffic        -0.28835         0.18943        -1.52216         0.12886
+W_households_with_children        -0.04654         0.32034        -0.14527         0.88458
+W_prop_commute_walked        -0.07394         0.34169        -0.21641         0.82880
+W_intersection_density         0.51930         0.25374         2.04655         0.04144
+       W_num_streets        -0.02437         0.30278        -0.08049         0.93590
+     W_housing_units        -0.66249         0.36635        -1.80837         0.07139
+          W_num_jobs        -0.03260         0.27702        -0.11768         0.90639
+        W_dock_count        -0.24025         0.27324        -0.87927         0.37985
+        W_stop_count         0.30312         0.24515         1.23647         0.21710
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           3.802
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2         77.620           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20         33.733           0.0280
+Koenker-Bassett test             20         25.045           0.1997
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)              0.0023        1.191           0.2337
+Lagrange Multiplier (lag)         1          0.016           0.8979
+Robust LM (lag)                   1          0.001           0.9816
+Lagrange Multiplier (error)       1          0.016           0.8994
+Robust LM (error)                 1          0.000           0.9948
+Lagrange Multiplier (SARMA)       2          0.017           0.9918
+================================ END OF REPORT =====================================
+
+
+modal substitution, citi_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:         376
+Mean dependent var  :     -0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0013                Degrees of Freedom    :         355
+R-squared           :      0.1295
+Adjusted R-squared  :      0.0805
+Sum squared residual:     327.292                F-statistic           :      2.6416
+Sigma-square        :       0.922                Prob(F-statistic)     :   0.0001891
+S.E. of regression  :       0.960                Log likelihood        :    -507.439
+Sigma-square ML     :       0.870                Akaike info criterion :    1056.877
+S.E of regression ML:      0.9330                Schwarz criterion     :    1139.398
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00925         0.05054        -0.18308         0.85484
+median_household_income        -0.23994         0.05905        -4.06345         0.00006
+         avg_traffic        -0.04139         0.05227        -0.79194         0.42893
+households_with_children         0.00432         0.07254         0.05958         0.95252
+ prop_commute_walked        -0.02685         0.05953        -0.45100         0.65226
+intersection_density        -0.05968         0.06171        -0.96707         0.33417
+         num_streets         0.05136         0.06735         0.76253         0.44625
+       housing_units        -0.03442         0.06535        -0.52678         0.59867
+            num_jobs         0.05480         0.05524         0.99188         0.32193
+          dock_count        -0.05157         0.05793        -0.89022         0.37395
+          stop_count         0.24396         0.05380         4.53504         0.00001
+W_median_household_income         0.15969         0.23119         0.69073         0.49019
+       W_avg_traffic        -0.08741         0.19607        -0.44582         0.65600
+W_households_with_children        -0.23861         0.33157        -0.71965         0.47221
+W_prop_commute_walked        -0.30712         0.35366        -0.86839         0.38577
+W_intersection_density         0.35625         0.26264         1.35645         0.17582
+       W_num_streets        -0.23950         0.31339        -0.76424         0.44523
+     W_housing_units        -0.23448         0.37918        -0.61837         0.53673
+          W_num_jobs        -0.33941         0.28673        -1.18374         0.23731
+        W_dock_count         0.16851         0.28282         0.59582         0.55168
+        W_stop_count         0.48722         0.25374         1.92014         0.05564
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           3.802
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2        112.106           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20         17.571           0.6157
+Koenker-Bassett test             20         10.884           0.9492
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)              0.0227        2.536           0.0112
+Lagrange Multiplier (lag)         1          1.970           0.1604
+Robust LM (lag)                   1          0.792           0.3734
+Lagrange Multiplier (error)       1          1.609           0.2046
+Robust LM (error)                 1          0.431           0.5115
+Lagrange Multiplier (SARMA)       2          2.401           0.3010
+================================ END OF REPORT =====================================
+modal integration, metro_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     mi_prop                Number of Observations:          65
+Mean dependent var  :      0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0078                Degrees of Freedom    :          44
+R-squared           :      0.3034
+Adjusted R-squared  :     -0.0132
+Sum squared residual:     45.2782                F-statistic           :      0.9583
+Sigma-square        :       1.029                Prob(F-statistic)     :       0.525
+S.E. of regression  :       1.014                Log likelihood        :     -80.480
+Sigma-square ML     :       0.697                Akaike info criterion :     202.960
+S.E of regression ML:      0.8346                Schwarz criterion     :     248.623
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.01479         0.13995        -0.10569         0.91631
+median_household_income         0.00550         0.19734         0.02787         0.97790
+         avg_traffic         0.07622         0.14798         0.51509         0.60906
+households_with_children        -0.10474         0.18960        -0.55246         0.58343
+ prop_commute_walked        -0.05694         0.20280        -0.28077         0.78020
+intersection_density        -0.05886         0.18413        -0.31965         0.75075
+         num_streets        -0.23441         0.26313        -0.89087         0.37785
+       housing_units         0.27660         0.17043         1.62293         0.11175
+            num_jobs        -0.03769         0.22192        -0.16983         0.86592
+          dock_count         0.34912         0.18681         1.86889         0.06830
+          stop_count         0.13756         0.25199         0.54587         0.58791
+W_median_household_income        -0.42536         0.44240        -0.96149         0.34156
+       W_avg_traffic        -0.18225         0.26632        -0.68431         0.49737
+W_households_with_children        -0.47012         0.50875        -0.92406         0.36050
+W_prop_commute_walked        -0.75390         0.47928        -1.57298         0.12289
+W_intersection_density        -0.07308         0.47433        -0.15407         0.87826
+       W_num_streets         0.47003         0.61462         0.76476         0.44850
+     W_housing_units         0.07141         0.42225         0.16912         0.86648
+          W_num_jobs        -0.40819         0.42675        -0.95652         0.34404
+        W_dock_count         0.13624         0.36318         0.37514         0.70936
+        W_stop_count        -0.36739         0.58549        -0.62748         0.53359
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           9.452
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2         12.823           0.0016
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20         27.596           0.1193
+Koenker-Bassett test             20         18.978           0.5233
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)             -0.1041       -0.271           0.7868
+Lagrange Multiplier (lag)         1          0.520           0.4708
+Robust LM (lag)                   1          1.441           0.2299
+Lagrange Multiplier (error)       1          1.136           0.2864
+Robust LM (error)                 1          2.057           0.1515
+Lagrange Multiplier (SARMA)       2          2.578           0.2756
+================================ END OF REPORT =====================================
+
+
+modal substitution, metro_start:
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES WITH SPATIALLY LAGGED X (SLX)
+-----------------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     ms_prop                Number of Observations:          65
+Mean dependent var  :      0.0000                Number of Variables   :          21
+S.D. dependent var  :      1.0078                Degrees of Freedom    :          44
+R-squared           :      0.4054
+Adjusted R-squared  :      0.1351
+Sum squared residual:     38.6511                F-statistic           :      1.4998
+Sigma-square        :       0.878                Prob(F-statistic)     :      0.1301
+S.E. of regression  :       0.937                Log likelihood        :     -75.337
+Sigma-square ML     :       0.595                Akaike info criterion :     192.674
+S.E of regression ML:      0.7711                Schwarz criterion     :     238.336
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.00309         0.12931        -0.02393         0.98102
+median_household_income        -0.09424         0.18233        -0.51686         0.60784
+         avg_traffic         0.11856         0.13672         0.86722         0.39053
+households_with_children        -0.17767         0.17517        -1.01425         0.31601
+ prop_commute_walked        -0.02151         0.18737        -0.11477         0.90915
+intersection_density         0.16317         0.17012         0.95914         0.34273
+         num_streets        -0.41204         0.24311        -1.69489         0.09716
+       housing_units         0.33336         0.15747         2.11702         0.03995
+            num_jobs         0.27354         0.20504         1.33412         0.18903
+          dock_count         0.23941         0.17259         1.38713         0.17239
+          stop_count        -0.07015         0.23282        -0.30129         0.76461
+W_median_household_income        -0.42718         0.40874        -1.04510         0.30168
+       W_avg_traffic        -0.17167         0.24606        -0.69767         0.48905
+W_households_with_children        -0.69241         0.47005        -1.47306         0.14785
+W_prop_commute_walked        -0.24995         0.44282        -0.56446         0.57531
+W_intersection_density        -0.42786         0.43824        -0.97631         0.33425
+       W_num_streets         0.81061         0.56786         1.42748         0.16050
+     W_housing_units         0.59674         0.39013         1.52961         0.13327
+          W_num_jobs        -0.35462         0.39428        -0.89940         0.37334
+        W_dock_count        -0.47178         0.33555        -1.40601         0.16674
+        W_stop_count         0.18951         0.54095         0.35033         0.72776
+------------------------------------------------------------------------------------
+Warning: Variable(s) ['Intercept'] removed for being constant.
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           9.452
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2          6.942           0.0311
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               20         23.946           0.2447
+Koenker-Bassett test             20         18.899           0.5284
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+- SARERR -
+TEST                           MI/DF       VALUE           PROB
+Moran's I (error)             -0.0176        0.843           0.3990
+Lagrange Multiplier (lag)         1          0.000           0.9830
+Robust LM (lag)                   1          0.193           0.6608
+Lagrange Multiplier (error)       1          0.033           0.8567
+Robust LM (error)                 1          0.225           0.6355
+Lagrange Multiplier (SARMA)       2          0.225           0.8935
+================================ END OF REPORT =====================================
